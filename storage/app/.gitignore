@@ -1,0 +1,6 @@
+*
+!public/
+!default_files/
+!language_files/
+!program_files/
+!.gitignore
