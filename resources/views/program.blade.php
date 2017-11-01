@@ -49,7 +49,7 @@
                             <div class="input-group has-warning">
                                 <input class="form-control" type="text" id="nome-do-programa" v-model="program.name" :disabled="disableNameInput == true">
                                 <span class="input-group-btn">
-                                    <button type="button" class="btn btn-outline-primary" @click="save" onclick="salvarPrograma();" title="Salvar">
+                                    <button type="button" class="btn btn-outline-primary" @click="save" title="Salvar">
                                         <i class="fa fa-floppy-o" aria-hidden="true"></i>
                                     </button>
                                     <button class="btn btn-outline-primary" title="Solicitar Correção">
@@ -145,13 +145,13 @@
                             <div class="input-group has-warning">
                                 <input class="form-control" type="text" id="nome-do-programa" v-model="program.name" :disabled="disableNameInput == true">
                                 <span class="input-group-btn">
-                                    <button type="button" class="btn btn-outline-primary" @click="save" onclick="salvarPrograma();" title="Salvar">
+                                    <button type="button" class="btn btn-outline-primary" @click="save" title="Salvar">
                                         <i class="fa fa-floppy-o" aria-hidden="true"></i>
                                     </button>
-                                    <button class="btn btn-outline-primary" onclick="solicitarCorrecao();" title="Solicitar Correção">
+                                    <button class="btn btn-outline-primary" title="Solicitar Correção">
                                         <i class="fa fa-check" aria-hidden="true"></i>
                                     </button>
-                                    <button class="btn btn-outline-primary" onclick="baixarPrograma();" title="Download">
+                                    <button class="btn btn-outline-primary" title="Download">
                                         <i class="fa fa-download" aria-hidden="true"></i>
                                     </button>
                                     <button class="btn btn-outline-primary" id="btn-new" @click="newProgram" title="Novo">
@@ -180,23 +180,21 @@
 
                                 <!-- List group -->
                                 <ul class="list-group list-group-flush" style="max-height: 380px; overflow-y: scroll;">
-                                    @foreach( $functions as $function )
-                                        <li class="list-group-item">
-                                            <a href="#" data-toggle="modal" data-target="#func-{{$function->id}}">
-                                                {{$function->name}}
-                                            </a>
-                                        </li>
+                                    <li v-for="item of language.functions" class="list-group-item">
+                                        <a href="#" data-toggle="modal" :data-target="'#func-' + item.id">
+                                            @{{ item.name }}
+                                        </a>
                                         <!-- Modal -->
-                                        <div class="modal fade" id="func-{{$function->id}}" tabindex="-1" role="dialog" aria-labelledby="func-{{$function->id}}">
+                                        <div class="modal fade" :id="'func-' + item.id" tabindex="-1" role="dialog" :aria-labelledby="'func-' + item.id">
                                             <div class="modal-dialog" role="document">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
-                                                        <h5 class="modal-title">{{$function->name}}</h5>
+                                                        <h5 class="modal-title">@{{ item.name }}</h5>
                                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
                                                     </div>
                                                     <div class="modal-body">
-                                                        <p>{{$function->description}}</p>
-                                                        <p><b>Parâmetros:</b> {{$function->parameters}}</p>
+                                                        <p>@{{ item.description }}</p>
+                                                        <p><b>Parâmetros:</b> @{{ item.parameters }}</p>
                                                     </div>
                                                     <div class="modal-footer">
                                                         <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
@@ -204,7 +202,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    @endforeach
+                                    </li>
                                 </ul>
                             </div>
                         </div>
