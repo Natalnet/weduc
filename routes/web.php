@@ -33,6 +33,7 @@ Route::get('/languages/user/current', 'ProgrammingLanguageController@byUser')->n
 Route::resource('functions', 'FunctionController');
 Route::get('/funcoes/linguagem/{language}', 'FunctionController@byLanguage')->name('functions.by-language');
 
+Route::post('/program', 'ProgramController@store');
 Route::put('/program/{program}', 'ProgramController@update');
 Route::get('/program/{program}/compile_target', 'ProgramController@compileTarget');
 Route::get('/program/{program}/send_code', 'ProgramController@sendCode')->name('programs.send-program');

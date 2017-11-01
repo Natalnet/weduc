@@ -49543,7 +49543,9 @@ Vue.component('ide', {
                     });
                 });
             } else if (this.isNameAvailable(this.program.name)) {
-                axios.put('/program/' + this.program.id, {
+                axios.post('/program', {
+                    language: this.language.id,
+                    name: this.program.name,
                     code: this.program.code,
                     custom_code: this.program.customCode
                 }).then(function (response) {

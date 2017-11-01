@@ -110,7 +110,8 @@ class ProgramController extends Controller
         // return $str;
     }
 
-    public function compileTarget(Program $program){
+    public function compileTarget(Program $program)
+    {
         $code = $program->custom_code;
         $programName = $program->name;
 
@@ -154,18 +155,21 @@ class ProgramController extends Controller
 //        shell_exec("rm -R ".$dest);
     }
 
-    public function downloadSendZip(ProgrammingLanguage $language){
+    public function downloadSendZip(ProgrammingLanguage $language)
+    {
         return response()->download($language->getFirstMedia('send')->getPath(), $language->id.'.zip');
     }
 
-    public function downloadProgram(Program $program){
+    public function downloadProgram(Program $program)
+    {
         $fileName = $program->language->sent_extension;
         $fileName = str_replace("nomedoprograma", $program->name, $fileName);
         $filePath = '../storage/app/program_files/'.$program->id.'/compilation/'.$program->name.'/'.$fileName;
         return response()->download($filePath);
     }
 
-    public function sendCode(Program $program){
+    public function sendCode(Program $program)
+    {
         $language = $program->language;
 
         $origin = "".$language->getFirstMedia('send')->getPath();
@@ -208,11 +212,29 @@ class ProgramController extends Controller
         $command .= " && /usr/bin/javac *.java -classpath jssc.jar";
         $command .= " && /usr/bin/jar vcfm ".$program->name.".jar manifest.mf jssc.jar *.class";
 
-        Storage::disk('program_files')->put($program->id.'/sending/execution.sh',$command);
+        Storage::disk('program_files')->put($program->id.'/sending/execution.sh', $command);
 
         exec('/bin/bash '.$dest.'/execution.sh');
 
         return response()->download($dest.'/'.$program->name.'.jar');
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        $language = ProgrammingLanguage::find($request->language);
+        $program = new Program();
+        $program->user_id = auth()->user()->id;
+        $program->name = $request->name;
+        $program->reduc_code = $request->code;
+        $program->custom_code = $request->custom_code;
+
+        return $language->programs()->save($program);
     }
 
     public function update(Request $request, Program $program)
