@@ -4,15 +4,11 @@
     <button class="navbar-toggler sidebar-toggler d-md-down-none" type="button">☰</button>
 
     <ul class="nav navbar-nav d-md-down-none">
-        <li class="nav-item px-3">
-            <a class="nav-link" href="#">Dashboard</a>
-        </li>
+        @hasrole('admin')
         <li class="nav-item px-3">
             <a class="nav-link" href="{{ route('users.index') }}">Usuários</a>
         </li>
-        <li class="nav-item px-3">
-            <a class="nav-link" href="#">Settings</a>
-        </li>
+        @endhasrole
     </ul>
     <ul class="nav navbar-nav ml-auto">
         <!-- Authentication Links -->
