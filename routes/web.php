@@ -30,7 +30,8 @@ Route::get('/linguagens', 'ProgrammingLanguageController@index')->name('language
 Route::resource('users', 'UserController', ['except' => ['create', 'store']]);
 Route::resource('languages', 'ProgrammingLanguageController');
 Route::get('/languages/user/current', 'ProgrammingLanguageController@byUser')->name('languages.by-user');
-Route::resource('functions', 'FunctionController');
+Route::resource('functions', 'FunctionController', ['except' => ['create']]);
+Route::get('/functions/create/{language}', 'FunctionController@create')->name('functions.create');
 Route::get('/funcoes/linguagem/{language}', 'FunctionController@byLanguage')->name('functions.by-language');
 
 Route::post('/program', 'ProgramController@store');

@@ -36,7 +36,7 @@ class FunctionController extends Controller
     public function byLanguage(ProgrammingLanguage $language)
     {
         $functions = $language->functions()->get();
-        return view('functions.by-language')->with(['functions' => $functions]);
+        return view('functions.by-language')->with(['language' => $language, 'functions' => $functions]);
     }
 
     /**
@@ -44,9 +44,9 @@ class FunctionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(ProgrammingLanguage $language)
     {
-        //
+        return view('functions.create', ['language' => $language]);
     }
 
     /**
@@ -57,7 +57,17 @@ class FunctionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            'description' => 'required',
+            'type' => 'required',
+            'return_type' => 'required',
+            'parameters' => 'required',
+            'code' => 'required'
+        ]);
+
+        $function = ReducFunction::create($request->all());
+        return $this->byLanguage($function->language);
     }
 
     /**
