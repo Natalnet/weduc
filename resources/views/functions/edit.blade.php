@@ -4,7 +4,7 @@
 <script src='https://cloud.tinymce.com/stable/tinymce.min.js'></script>
 <script>
     tinymce.init({
-        selector: '#description'
+        // selector: '#description'
     });
 </script>
 @endpush
@@ -18,20 +18,37 @@
                     <h4>Edição do Cadastro de Funções</h4>
                     <hr>
                     <p class="text-muted">Preencha os campos abaixo</p>
-                    <form method="POST" action="{{ route('login') }}">
+                    <form method="POST" action="{{ route('functions.update', ['function' => $function->id]) }}">
                         {{ csrf_field() }}
+                        {{ method_field('PUT') }}
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="name">Nome</label>
-                                    <input type="text" class="form-control" name="name" id="name" placeholder="Digite um nome para a função" value="{{ old('name') ?: $function->name }}">
+                                    <input type="text" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" id="name" placeholder="Digite um nome para a função" value="{{ old('name', $function->name) }}">
+
+                                    @if ($errors->has('name'))
+                                        <div class="invalid-feedback" style="display: block;">
+                                            <strong>{{ $errors->first('name') }}</strong>
+                                        </div>
+                                    @endif
                                 </div>
 
                                 <div class="form-group">
                                     <label for="description">Descrição</label>
-                                    <textarea type="text" class="form-control" name="description" id="description" placeholder="Descrição">
-                                        {{ old('description') ?: $function->description }}
-                                    </textarea>
+                                    <textarea
+                                        type="text"
+                                        class="form-control{{ $errors->has('description') ? ' is-invalid' : '' }}"
+                                        name="description"
+                                        id="description"
+                                        placeholder="Descrição"
+                                    >{{ old('description', $function->description) }}</textarea>
+
+                                    @if ($errors->has('description'))
+                                        <div class="invalid-feedback" style="display: block;">
+                                            <strong>{{ $errors->first('description') }}</strong>
+                                        </div>
+                                    @endif
                                 </div>
                             </div>
                             <div class="col-md-6">
@@ -39,22 +56,34 @@
                                     <label for="type">Tipo</label>
                                     <select id="type" name="type" class="form-control{{ $errors->has('type') ? ' is-invalid' : '' }}">
                                         <option value="">Selecione uma opção</option>
-                                        <option value="1">Escrita</option>
-                                        <option value="2">Leitura</option>
-                                        <option value="3">Movimentação</option>
-                                        <option value="4">Outros</option>
+                                        <option value="Escrita" {{ $function->type == 'Escrita' ? 'selected' : '' }}>Escrita</option>
+                                        <option value="Leitura" {{ $function->type == 'Leitura' ? 'selected' : '' }}>Leitura</option>
+                                        <option value="Movimentação" {{ $function->type == 'Movimentação' ? 'selected' : '' }}>Movimentação</option>
+                                        <option value="Outros" {{ $function->type == 'Outros' ? 'selected' : '' }}>Outros</option>
                                     </select>
+
+                                    @if ($errors->has('type'))
+                                        <div class="invalid-feedback" style="display: block;">
+                                            <strong>{{ $errors->first('type') }}</strong>
+                                        </div>
+                                    @endif
                                 </div>
 
                                 <div class="form-group">
                                     <label for="return_type">Retorno</label>
                                     <select id="return_type" name="return_type" class="form-control{{ $errors->has('return_type') ? ' is-invalid' : '' }}">
                                         <option>Selecione uma opção</option>
-                                        <option value="1">boolean</option>
-                                        <option value="2">float</option>
-                                        <option value="3">String</option>
-                                        <option value="4">Void</option>
+                                        <option value="boolean" {{ $function->return_type == 'boolean' ? 'selected' : '' }}>boolean</option>
+                                        <option value="float" {{ $function->return_type == 'float' ? 'selected' : '' }}>float</option>
+                                        <option value="String" {{ $function->return_type == 'String' ? 'selected' : '' }}>String</option>
+                                        <option value="Void" {{ $function->return_type == 'Void' ? 'selected' : '' }}>Void</option>
                                     </select>
+
+                                    @if ($errors->has('return_type'))
+                                        <div class="invalid-feedback" style="display: block;">
+                                            <strong>{{ $errors->first('return_type') }}</strong>
+                                        </div>
+                                    @endif
                                 </div>
 
 
@@ -62,28 +91,33 @@
                                     <label for="parameters">Quantidade de parâmetros</label>
                                     <select id="parameters" name="parameters" class="form-control{{ $errors->has('parameters') ? ' is-invalid' : '' }}">
                                         <option>Selecione uma opção</option>
-                                        <option value="1">0</option>
-                                        <option value="2">1</option>
-                                        <option value="3">2</option>
-                                        <option value="4">3</option>
-                                        <option value="3">4</option>
-                                        <option value="4">5</option>
+                                        <option value="0" {{ $function->parameters == '0' ? 'selected' : '' }}>0</option>
+                                        <option value="1" {{ $function->parameters == '1' ? 'selected' : '' }}>1</option>
+                                        <option value="2" {{ $function->parameters == '2' ? 'selected' : '' }}>2</option>
+                                        <option value="3" {{ $function->parameters == '3' ? 'selected' : '' }}>3</option>
+                                        <option value="4" {{ $function->parameters == '4' ? 'selected' : '' }}>4</option>
+                                        <option value="5" {{ $function->parameters == '5' ? 'selected' : '' }}>5</option>
                                     </select>
-                                </div>
 
-                                @if ($errors->has('email'))
-                                    <div class="invalid-feedback" style="display: block;">
-                                        <strong>{{ $errors->first('email') }}</strong>
-                                    </div>
-                                @endif
+                                    @if ($errors->has('parameters'))
+                                        <div class="invalid-feedback" style="display: block;">
+                                            <strong>{{ $errors->first('parameters') }}</strong>
+                                        </div>
+                                    @endif
+                                </div>
                             </div>
                         </div>
 
                         <div class="form-group">
                             <label for="code">Código</label>
-                            <textarea type="text" class="form-control" name="code" id="code" placeholder="Descrição" rows="6">
-                                {{ old('code') ?: $function->code }}
-                            </textarea>
+                            <textarea
+                                type="text"
+                                class="form-control{{ $errors->has('code') ? ' is-invalid' : '' }}"
+                                name="code"
+                                id="code"
+                                placeholder="Descrição"
+                                rows="6"
+                            >{{ old('code') ?: $function->code }}</textarea>
 
                             @if ($errors->has('code'))
                                 <div class="invalid-feedback" style="display: block;">

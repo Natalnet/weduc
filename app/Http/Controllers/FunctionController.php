@@ -101,7 +101,18 @@ class FunctionController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            'description' => 'required',
+            'type' => 'required',
+            'return_type' => 'required',
+            'parameters' => 'required',
+            'code' => 'required'
+        ]);
+
+        $function = ReducFunction::find($id);
+        $function->fill($request->all())->save();
+        return $this->byLanguage($function->language);
     }
 
     /**
