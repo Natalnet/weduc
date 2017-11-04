@@ -1,20 +1,26 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
+<div class="container-fluid animated fadeIn">
     <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
-                <div class="panel-heading">Dashboard</div>
-
-                <div class="panel-body">
+        <div class="col-md-12">
+            <div class="card card-accent-primary">
+                <div class="card-body">
                     @if (session('status'))
                         <div class="alert alert-success">
                             {{ session('status') }}
                         </div>
                     @endif
 
-                    You are logged in!
+                    <h4>
+                        @auth
+                            Olá {{auth()->user()->name}}!
+                        @endauth
+                        Seja bem vindo ao Weduc!
+                    </h4>
+                    <hr>
+                    <p>Este é um ambiente completo para robótica educacional. Aqui você pode programar diversos robôs, discutir sobre robótica no nosso fórum, ser acompanhado por professores de robótica de todo o mundo e muito mais!</p>
+                    <a href="{{ route('program') }}" class="btn btn-primary">Comece a programar aqui!</a>
                 </div>
             </div>
         </div>

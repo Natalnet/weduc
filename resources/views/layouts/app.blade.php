@@ -60,7 +60,7 @@
             @include('parts.sidebar')
 
             <!-- Main content -->
-            <main class="main">
+            <main class="main" style="min-height: 84vh;">
 
                 @yield('content')
             </main>
