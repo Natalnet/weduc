@@ -10,6 +10,13 @@ class ProgrammingLanguage extends Model implements HasMedia
 {
     use HasMediaTrait;
 
+    /**
+     * The attributes that aren't mass assignable.
+     *
+     * @var array
+     */
+    protected $guarded = [];
+
     public function dataType()
     {
         return $this->hasOne('App\DataType');
@@ -28,5 +35,10 @@ class ProgrammingLanguage extends Model implements HasMedia
     public function controlFlowStatements()
     {
         return $this->hasOne('App\ControlFlow');
+    }
+
+    public function getDataType($key)
+    {
+        return $this->dataType->$key;
     }
 }

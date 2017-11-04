@@ -93,7 +93,25 @@ class ProgrammingLanguageController extends Controller
      */
     public function update(UpdateProgrammingLanguage $request, ProgrammingLanguage $language)
     {
-        dd($request);
+        $langauge_fields = $request->only([
+            'call_function',
+            'compile_code',
+            'compiler_file',
+            'description',
+            'extension',
+            'header',
+            'footnote',
+            'main_function',
+            'name',
+            'other_functions',
+            'robot',
+            'send_code',
+            'sent_extension'
+        ]);
+
+        $language->fill($langauge_fields)->save();
+
+        return redirect()->route('languages.by-user');
     }
 
     /**
