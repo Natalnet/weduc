@@ -52,10 +52,10 @@
                                     <label for="type">Tipo</label>
                                     <select id="type" name="type" class="form-control{{ $errors->has('type') ? ' is-invalid' : '' }}">
                                         <option value="">Selecione uma opção</option>
-                                        <option value="1">Escrita</option>
-                                        <option value="2">Leitura</option>
-                                        <option value="3">Movimentação</option>
-                                        <option value="4">Outros</option>
+                                        <option value="Escrita">Escrita</option>
+                                        <option value="Leitura">Leitura</option>
+                                        <option value="Movimentação">Movimentação</option>
+                                        <option value="Outros">Outros</option>
                                     </select>
 
                                     @if ($errors->has('type'))
@@ -69,10 +69,10 @@
                                     <label for="return_type">Retorno</label>
                                     <select id="return_type" name="return_type" class="form-control{{ $errors->has('return_type') ? ' is-invalid' : '' }}">
                                         <option value="">Selecione uma opção</option>
-                                        <option value="1">boolean</option>
-                                        <option value="2">float</option>
-                                        <option value="3">String</option>
-                                        <option value="4">Void</option>
+                                        <option value="boolean">boolean</option>
+                                        <option value="float">float</option>
+                                        <option value="String">String</option>
+                                        <option value="Void">Void</option>
                                     </select>
 
                                     @if ($errors->has('return_type'))
@@ -87,12 +87,12 @@
                                     <label for="parameters">Quantidade de parâmetros</label>
                                     <select id="parameters" name="parameters" class="form-control{{ $errors->has('parameters') ? ' is-invalid' : '' }}">
                                         <option value="">Selecione uma opção</option>
-                                        <option value="1">0</option>
-                                        <option value="2">1</option>
-                                        <option value="3">2</option>
-                                        <option value="4">3</option>
-                                        <option value="3">4</option>
-                                        <option value="4">5</option>
+                                        <option value="0">0</option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
                                     </select>
 
                                     @if ($errors->has('parameters'))
