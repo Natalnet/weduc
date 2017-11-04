@@ -72,22 +72,22 @@
                         <a href="{{ url('/home') }}">Home</a>
                     @else
                         <a href="{{ route('login') }}">Login</a>
-                        <a href="{{ route('register') }}">Register</a>
+                        <a href="{{ route('register') }}">Cadastro</a>
                     @endauth
                 </div>
             @endif
 
             <div class="content">
                 <div class="title m-b-md">
-                    Laravel
+                    Weduc
                 </div>
 
                 <div class="links">
-                    <a href="https://laravel.com/docs">Documentation</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
+                    <a href="https://ufrn.br">UFRN</a>
+                    <a href="http://ifrn.edu.br">IFRN</a>
+                    <a href="http://www.natalnet.br">Natalnet</a>
+                    <a href="http://laica.ifrn.edu.br">LAICA</a>
+                    <a href="https://github.com/natalnet/weduc">GitHub</a>
                 </div>
             </div>
         </div>

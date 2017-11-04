@@ -40,7 +40,7 @@
                                         <button type="submit" class="btn btn-primary px-4">Login</button>
                                     </div>
                                     <div class="col-6 text-right">
-                                        <button type="button" class="btn btn-link px-0">Esqueceu sua senha?</button>
+                                        <a href="{{ route('password.request') }}" class="btn btn-link px-0">Esqueceu sua senha?</a>
                                     </div>
                                 </div>
                             </form>
@@ -51,7 +51,7 @@
                             <div>
                                 <h2>Cadastre-se</h2>
                                 <p>Venha fazer parte da nossa rede e utilizar o que há de melhor em robótica educacional.</p>
-                                <button type="button" class="btn btn-primary active mt-3">Cadastre-se Agora!</button>
+                                <a href="{{ route('register') }}" class="btn btn-primary active mt-3">Cadastre-se Agora!</a>
                             </div>
                         </div>
                     </div>
