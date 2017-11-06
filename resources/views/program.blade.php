@@ -39,6 +39,11 @@
                                     <button class="btn btn-outline-warning" @click="onCompile">
                                         <i class="fa fa-code" aria-hidden="true"></i> Compilar
                                     </button>
+                                    @auth
+                                        <a :href="downloadUrl" class="btn btn-outline-success" target="_blank" v-if="disableNameInput == true">
+                                            <i class="fa fa-paper-plane-o" aria-hidden="true"></i> Enviar
+                                        </a>
+                                    @endauth
                                 </span>
                             </div>
                         </div>
