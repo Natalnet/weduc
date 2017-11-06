@@ -136,7 +136,7 @@ class ProgramController extends Controller
         Storage::disk('program_files')->put($program->id.'/compilation/'.$programName.'/'.$programName.'.'.$language->extension, $code);
 
         // Define o arquivo onde ficarão os comandos do Make
-        $comando = "DISPLAY=:1 " . $language->compile_code;
+        $comando = $language->compile_code;
 
         $comando = str_replace("diretorio", $dest, $comando);
         $comando = str_replace("localdocompilador", $compiler_path, $comando);
