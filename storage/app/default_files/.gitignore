@@ -1,0 +1,5 @@
+*
+!.gitignore
+!WeducClient.java
+!HttpDownloadUtility.java
+!weducClient.zip
