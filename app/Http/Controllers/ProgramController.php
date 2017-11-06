@@ -136,7 +136,7 @@ class ProgramController extends Controller
         Storage::disk('program_files')->put($program->id.'/compilation/'.$programName.'/'.$programName.'.'.$language->extension, $code);
 
         // Define o arquivo onde ficarão os comandos do Make
-        $comando = $language->compile_code;
+        $comando =   $language->compile_code;
 
         $comando = str_replace("diretorio", $dest, $comando);
         $comando = str_replace("localdocompilador", $compiler_path, $comando);
@@ -148,11 +148,7 @@ class ProgramController extends Controller
         $makeCommand = "/bin/bash ".$dest."/weduc.sh";
 
         // Iniciei a compilacao na linguagem
-        echo shell_exec($makeCommand);
-
-
-
-//        shell_exec("rm -R ".$dest);
+        shell_exec($makeCommand);
     }
 
     public function downloadSendZip(ProgrammingLanguage $language)
