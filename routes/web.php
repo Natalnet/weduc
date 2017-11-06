@@ -36,7 +36,7 @@ Route::get('/funcoes/linguagem/{language}', 'FunctionController@byLanguage')->na
 
 Route::post('/program', 'ProgramController@store');
 Route::put('/program/{program}', 'ProgramController@update');
-Route::get('/program/{program}/compile_target', 'ProgramController@compileTarget');
+Route::post('/program/{program}/compile_target', 'ProgramController@compileTarget');
 Route::get('/program/{program}/send_code', 'ProgramController@sendCode')->name('programs.send-program');
 Route::get('/program/{program}/download', 'ProgramController@downloadProgram');
 

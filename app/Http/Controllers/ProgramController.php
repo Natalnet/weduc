@@ -170,6 +170,8 @@ class ProgramController extends Controller
 
     public function sendCode(Program $program)
     {
+        $this->compileTarget($program);
+
         $language = $program->language;
 
         $origin = "".$language->getFirstMedia('send')->getPath();

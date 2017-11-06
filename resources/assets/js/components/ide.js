@@ -97,6 +97,35 @@ Vue.component('ide', {
             })
         },
 
+
+        compileTarget() {
+            if (this.program.id) {
+                axios.post('/program/' + this.program.id + '/compile_target')
+                    .then(response => {
+                        this.errors = ''
+                        console.log(response.data.translatedCode)
+                        this.program.customCode = response.data.translatedCode
+                        this.$notify({
+                            group: 'ide',
+                            type: 'success',
+                            title: 'Programa compilado com sucesso!',
+                            text: 'O seu programa foi compilado com sucesso na linguagem alvo!'
+                        });
+                    })
+                    .catch(error => {
+                        console.log(error.response.data)
+                        this.errors = error.response.data.message
+                    })
+            } else {
+                this.$notify({
+                    group: 'ide',
+                    type: 'error',
+                    title: 'Erro ao compilar o programa!',
+                    text: 'Para compilar o programa na linguagem alvo é necessário salvá-lo primeiro.'
+                });
+            }
+        },
+
         updateCode (newCode) {
             if (this.program.code !== newCode) {
                 this.program.code = newCode
@@ -153,6 +182,7 @@ Vue.component('ide', {
                         title: 'Programa salvo com sucesso!',
                         text: 'O seu programa foi salvo com sucesso!'
                     });
+                    this.loadProgram(this.program)
                 })
                 .catch(error => {
                     this.$notify({
