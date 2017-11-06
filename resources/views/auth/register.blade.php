@@ -34,7 +34,7 @@
 
                     <div class="input-group mb-3">
                         <span class="input-group-addon"><i class="fa fa-lock"></i></span>
-                        <input type="text" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" value="{{ old('password') }}" placeholder="@lang('register.form.password')">
+                        <input type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" value="{{ old('password') }}" placeholder="@lang('register.form.password')">
 
                         @if ($errors->has('password'))
                             <span class="help-block">
@@ -45,13 +45,7 @@
 
                     <div class="input-group mb-3">
                         <span class="input-group-addon"><i class="fa fa-lock"></i></span>
-                        <input type="text" class="form-control{{ $errors->has('password-confirm') ? ' is-invalid' : '' }}" name="password-confirm" value="{{ old('password-confirm') }}" placeholder="@lang('register.form.password_confirmation')">
-
-                        @if ($errors->has('password-confirm'))
-                            <span class="help-block">
-                                <strong>{{ $errors->first('password-confirm') }}</strong>
-                            </span>
-                        @endif
+                        <input type="password" class="form-control" name="password_confirmation" placeholder="@lang('register.form.password_confirmation')">
                     </div>
 
                     <button type="submit" class="btn btn-block btn-primary">
