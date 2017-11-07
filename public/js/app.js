@@ -49389,39 +49389,6 @@ module.exports = function listToStyles (parentId, list) {
 /* 45 */
 /***/ (function(module, exports) {
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var Errors = function () {
-    function Errors() {
-        _classCallCheck(this, Errors);
-
-        this.errors = {};
-    }
-
-    _createClass(Errors, [{
-        key: 'get',
-        value: function get(field) {
-            if (this.errors[field]) {
-                return this.errors[field];
-            }
-        }
-    }, {
-        key: 'record',
-        value: function record(errors) {
-            this.errors = errors;
-        }
-    }, {
-        key: 'has',
-        value: function has(field) {
-            return this.errors.hasOwnProperty(field);
-        }
-    }]);
-
-    return Errors;
-}();
-
 Vue.component('ide', {
     props: ['languages'],
 
@@ -49474,7 +49441,6 @@ Vue.component('ide', {
         loadLanguage: function loadLanguage(value) {
             var _this2 = this;
 
-            this.language.name = "NXC";
             axios.get('/fetchlanguage/' + value).then(function (response) {
                 console.log(response.data);
                 _this2.language = response.data;
@@ -49580,7 +49546,7 @@ Vue.component('ide', {
                         title: 'Programa salvo com sucesso!',
                         text: 'O seu programa foi salvo com sucesso!'
                     });
-                    _this5.loadProgram(_this5.program);
+                    _this5.disableNameInput = 1;
                 }).catch(function (error) {
                     _this5.$notify({
                         group: 'ide',

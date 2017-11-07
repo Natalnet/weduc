@@ -1,23 +1,3 @@
-class Errors {
-    constructor() {
-        this.errors = {};
-    }
-
-    get(field) {
-        if (this.errors[field]) {
-            return this.errors[field];
-        }
-    }
-
-    record(errors) {
-        this.errors = errors;
-    }
-
-    has(field) {
-        return this.errors.hasOwnProperty(field);
-    }
-}
-
 Vue.component('ide', {
     props: ['languages'],
 
@@ -66,7 +46,6 @@ Vue.component('ide', {
 
     methods: {
         loadLanguage(value) {
-            this.language.name = "NXC"
             axios.get('/fetchlanguage/'+value)
             .then(response => {
                 console.log(response.data)
@@ -180,7 +159,7 @@ Vue.component('ide', {
                         title: 'Programa salvo com sucesso!',
                         text: 'O seu programa foi salvo com sucesso!'
                     });
-                    this.loadProgram(this.program)
+                    this.disableNameInput = 1
                 })
                 .catch(error => {
                     this.$notify({
