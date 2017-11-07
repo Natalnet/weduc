@@ -126,7 +126,8 @@ class ProgramController extends Controller
 
         // Compilação na linguagem alvo:
 
-        // Cria a pasta do programa
+        // Remove (se existir) e cria a pasta do programa
+        shell_exec("rm -R ".$dest);
         shell_exec("mkdir -p ".$dest);
 
         //Copia os arquivos de include e extrai na pasta
@@ -148,7 +149,7 @@ class ProgramController extends Controller
         $makeCommand = "/bin/bash ".$dest."/weduc.sh";
 
         // Iniciei a compilacao na linguagem
-        shell_exec($makeCommand);
+        return shell_exec($makeCommand);
     }
 
     public function downloadSendZip(ProgrammingLanguage $language)
