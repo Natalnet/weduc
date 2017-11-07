@@ -103,8 +103,6 @@ Vue.component('ide', {
                 axios.post('/program/' + this.program.id + '/compile_target')
                     .then(response => {
                         this.errors = ''
-                        console.log(response.data.translatedCode)
-                        this.program.customCode = response.data.translatedCode
                         this.$notify({
                             group: 'ide',
                             type: 'success',

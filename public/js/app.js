@@ -49509,8 +49509,6 @@ Vue.component('ide', {
             if (this.program.id) {
                 axios.post('/program/' + this.program.id + '/compile_target').then(function (response) {
                     _this4.errors = '';
-                    console.log(response.data.translatedCode);
-                    _this4.program.customCode = response.data.translatedCode;
                     _this4.$notify({
                         group: 'ide',
                         type: 'success',
