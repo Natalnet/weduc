@@ -183,7 +183,8 @@ class ProgramController extends Controller
 
         // Compilação na linguagem alvo:
 
-        // Cria a pasta temporária
+        // Remove (se existir) e cria a pasta temporária
+        shell_exec("rm -R ".$dest);
         shell_exec("mkdir ".$dest);
 
         //Extrai o pacote default na pasta
@@ -203,6 +204,9 @@ class ProgramController extends Controller
         $programDownloadUrl = url('/program/'.$program->id.'/download');
         $weducClient=str_replace('$DOWNLOAD_URL', $programDownloadUrl, $weducClient);
 
+        $jsscDownloadUrl = url('/program/'.$program->id.'/download/jssc');
+        $weducClient=str_replace('$JSSC_DOWNLOAD_URL', $jsscDownloadUrl, $weducClient);
+
         $languageFilesDownloadUrl = url('/download/envio/linguagem/'.$language->id);
         $weducClient=str_replace('$LANGUAGE_FILES_URL', $languageFilesDownloadUrl, $weducClient);
 
@@ -214,7 +218,7 @@ class ProgramController extends Controller
         file_put_contents($dest."/WeducClient.java", $weducClient);
 
         $command = "cd ".$dest;
-        $command .= " && /usr/bin/javac *.java";
+        $command .= " && /usr/bin/javac *.java -classpath jssc.jar";
         $command .= " && /usr/bin/jar vcfm ".$program->name.".jar manifest.mf *.class";
 
         Storage::disk('program_files')->put($program->id.'/sending/execution.sh', $command);
