@@ -164,6 +164,12 @@ class ProgramController extends Controller
         return response()->download($filePath);
     }
 
+    public function downloadJssc(Program $program)
+    {
+        $filePath = '../storage/app/program_files/'.$program->id.'/sending/jssc.jar';
+        return response()->download($filePath);
+    }
+
     public function sendCode(Program $program)
     {
         $this->compileTarget($program);
@@ -195,6 +201,9 @@ class ProgramController extends Controller
 
         $programDownloadUrl = url('/program/'.$program->id.'/download');
         $weducClient=str_replace('$DOWNLOAD_URL', $programDownloadUrl, $weducClient);
+
+        $jsscDownloadUrl = url('/program/'.$program->id.'/download/jssc');
+        $weducClient=str_replace('$JSSC_DOWNLOAD_URL', $jsscDownloadUrl, $weducClient);
 
         $languageFilesDownloadUrl = url('/download/envio/linguagem/'.$language->id);
         $weducClient=str_replace('$LANGUAGE_FILES_URL', $languageFilesDownloadUrl, $weducClient);

@@ -74,10 +74,21 @@ public class WeducClient {
         String comando = "$SEND_CODE";
         comando = comando.replace("diretorio", System.getProperty("user.dir"));
         if (comando.contains("porta")) {
-            String portName = (String)JOptionPane.showInputDialog(null, "Selecione a porta em que seu dispositivo esta conectado:", "W-Educ - Seletor de Portas",JOptionPane.QUESTION_MESSAGE, null,SerialPortList.getPortNames(),null);
+            jsscFile = new File("../../jssc.jar")
+            if(jsscFile.exists() && !jsscFile.isDirectory()){
+                String portName = (String)JOptionPane.showInputDialog(null, "Selecione a porta em que seu dispositivo esta conectado:", "W-Educ - Seletor de Portas",JOptionPane.QUESTION_MESSAGE, null,SerialPortList.getPortNames(),null);
 
-            if (portName != null){
-                comando = comando.replace("porta",  portName);
+                if (portName != null){
+                    comando = comando.replace("porta",  portName);
+                }
+            } else {
+                String fileURL = "$JSSC_DOWNLOAD_URL";
+                String saveDir = "../../";
+                try {
+                    HttpDownloadUtility.downloadFile(fileURL, saveDir);
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
             }
         }
 

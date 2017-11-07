@@ -39,5 +39,6 @@ Route::put('/program/{program}', 'ProgramController@update');
 Route::post('/program/{program}/compile_target', 'ProgramController@compileTarget');
 Route::get('/program/{program}/send_code', 'ProgramController@sendCode')->name('programs.send-program');
 Route::get('/program/{program}/download', 'ProgramController@downloadProgram');
+Route::get('/program/{program}/download/jssc', 'ProgramController@downloadJssc');
 
 Route::get('/download/envio/linguagem/{language}', 'ProgramController@downloadSendZip');
