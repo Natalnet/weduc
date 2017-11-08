@@ -11,12 +11,12 @@ Vue.component('ide', {
                 code: "",
                 customCode: ""
             },
-            disableNameInput: 0
+            disableNameInput: 0,
+            blockly: false
         };
     },
 
     mounted() {
-        console.log('Component mounted.')
         this.$swal({
             title: 'Selecione uma linguagem para programar',
             input: 'select',
@@ -48,20 +48,40 @@ Vue.component('ide', {
         loadLanguage(value) {
             axios.get('/fetchlanguage/'+value)
             .then(response => {
-                console.log(response.data)
                 this.language = response.data
             })
             .catch(error => console.log(error))
         },
 
-        onCompile() {
+        setupBlockly() {
+            if (!this.blockly) {
+                var workspace = Blockly.inject('blocklyDiv', {
+                    toolbox: document.getElementById('toolbox')
+                })
+
+                myUpdateFunction = event => {
+                    var code = Blockly.Reduc.workspaceToCode(workspace);
+                    this.updateCode(code)
+                    $('#thecode').html(code);
+                }
+
+                workspace.addChangeListener(myUpdateFunction);
+
+                setTimeout(function() {
+                    window.dispatchEvent(new Event('resize'));
+                }, 300);
+
+                this.blockly = true
+            }
+        },
+
+        compile() {
             axios.post('/compilar',{
                 code: this.program.code,
                 language: this.language.id
             })
             .then(response => {
                 this.errors = ''
-                console.log(response.data.translatedCode)
                 this.program.customCode = response.data.translatedCode
                 this.$notify({
                     group: 'ide',
@@ -71,7 +91,6 @@ Vue.component('ide', {
                 });
             })
             .catch(error => {
-                console.log(error.response.data)
                 this.errors = error.response.data.message
             })
         },
@@ -81,6 +100,7 @@ Vue.component('ide', {
             if (this.program.id) {
                 axios.post('/program/' + this.program.id + '/compile_target')
                     .then(response => {
+                        console.log(response)
                         this.errors = ''
                         this.$notify({
                             group: 'ide',
@@ -90,7 +110,6 @@ Vue.component('ide', {
                         });
                     })
                     .catch(error => {
-                        console.log(error.response.data)
                         this.errors = error.response.data.message
                     })
             } else {
@@ -153,13 +172,18 @@ Vue.component('ide', {
                     custom_code: this.program.customCode
                 })
                 .then(response => {
+                    program = response.data
+                    this.program.id = program.id
+                    this.disableNameInput = 1
+
+                    this.language.programs.push(program)
+
                     this.$notify({
                         group: 'ide',
                         type: 'success',
                         title: 'Programa salvo com sucesso!',
                         text: 'O seu programa foi salvo com sucesso!'
                     });
-                    this.disableNameInput = 1
                 })
                 .catch(error => {
                     this.$notify({

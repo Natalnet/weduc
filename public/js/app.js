@@ -49402,13 +49402,13 @@ Vue.component('ide', {
                 code: "",
                 customCode: ""
             },
-            disableNameInput: 0
+            disableNameInput: 0,
+            blockly: false
         };
     },
     mounted: function mounted() {
         var _this = this;
 
-        console.log('Component mounted.');
         this.$swal({
             title: 'Selecione uma linguagem para programar',
             input: 'select',
@@ -49442,48 +49442,68 @@ Vue.component('ide', {
             var _this2 = this;
 
             axios.get('/fetchlanguage/' + value).then(function (response) {
-                console.log(response.data);
                 _this2.language = response.data;
             }).catch(function (error) {
                 return console.log(error);
             });
         },
-        onCompile: function onCompile() {
+        setupBlockly: function setupBlockly() {
             var _this3 = this;
+
+            if (!this.blockly) {
+                var workspace = Blockly.inject('blocklyDiv', {
+                    toolbox: document.getElementById('toolbox')
+                });
+
+                myUpdateFunction = function myUpdateFunction(event) {
+                    var code = Blockly.Reduc.workspaceToCode(workspace);
+                    _this3.updateCode(code);
+                    $('#thecode').html(code);
+                };
+
+                workspace.addChangeListener(myUpdateFunction);
+
+                setTimeout(function () {
+                    window.dispatchEvent(new Event('resize'));
+                }, 300);
+
+                this.blockly = true;
+            }
+        },
+        compile: function compile() {
+            var _this4 = this;
 
             axios.post('/compilar', {
                 code: this.program.code,
                 language: this.language.id
             }).then(function (response) {
-                _this3.errors = '';
-                console.log(response.data.translatedCode);
-                _this3.program.customCode = response.data.translatedCode;
-                _this3.$notify({
+                _this4.errors = '';
+                _this4.program.customCode = response.data.translatedCode;
+                _this4.$notify({
                     group: 'ide',
                     type: 'success',
                     title: 'Programa compilado com sucesso!',
                     text: 'O seu programa foi compilado com sucesso!'
                 });
             }).catch(function (error) {
-                console.log(error.response.data);
-                _this3.errors = error.response.data.message;
+                _this4.errors = error.response.data.message;
             });
         },
         compileTarget: function compileTarget() {
-            var _this4 = this;
+            var _this5 = this;
 
             if (this.program.id) {
                 axios.post('/program/' + this.program.id + '/compile_target').then(function (response) {
-                    _this4.errors = '';
-                    _this4.$notify({
+                    console.log(response);
+                    _this5.errors = '';
+                    _this5.$notify({
                         group: 'ide',
                         type: 'success',
                         title: 'Programa compilado com sucesso!',
                         text: 'O seu programa foi compilado com sucesso na linguagem alvo!'
                     });
                 }).catch(function (error) {
-                    console.log(error.response.data);
-                    _this4.errors = error.response.data.message;
+                    _this5.errors = error.response.data.message;
                 });
             } else {
                 this.$notify({
@@ -49512,21 +49532,21 @@ Vue.component('ide', {
             this.disableNameInput = 1;
         },
         save: function save() {
-            var _this5 = this;
+            var _this6 = this;
 
             if (this.program.id) {
                 axios.put('/program/' + this.program.id, {
                     code: this.program.code,
                     custom_code: this.program.customCode
                 }).then(function (response) {
-                    _this5.$notify({
+                    _this6.$notify({
                         group: 'ide',
                         type: 'success',
                         title: 'Programa salvo com sucesso!',
                         text: 'O seu programa foi salvo com sucesso!'
                     });
                 }).catch(function (error) {
-                    _this5.$notify({
+                    _this6.$notify({
                         group: 'ide',
                         type: 'error',
                         title: 'Erro ao salvar programa!',
@@ -49540,15 +49560,20 @@ Vue.component('ide', {
                     code: this.program.code,
                     custom_code: this.program.customCode
                 }).then(function (response) {
-                    _this5.$notify({
+                    program = response.data;
+                    _this6.program.id = program.id;
+                    _this6.disableNameInput = 1;
+
+                    _this6.language.programs.push(program);
+
+                    _this6.$notify({
                         group: 'ide',
                         type: 'success',
                         title: 'Programa salvo com sucesso!',
                         text: 'O seu programa foi salvo com sucesso!'
                     });
-                    _this5.disableNameInput = 1;
                 }).catch(function (error) {
-                    _this5.$notify({
+                    _this6.$notify({
                         group: 'ide',
                         type: 'error',
                         title: 'Erro ao salvar programa!',
