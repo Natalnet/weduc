@@ -72,7 +72,11 @@ class ProgramController extends Controller
         $trans = new Translator($parser->parseTree);
         $trans->setMainFunction($language->main_function);
         $controlFlow = $language->controlFlowStatements()->first();
-        $trans->setControlFlowStatements($controlFlow->if_code);
+        $statements = [
+            'ifStatement' => $controlFlow->if_code,
+            'repeatStatement' => $controlFlow->repeat_code
+        ];
+        $trans->setControlFlowStatements($statements);
         $trans->setOperators([ReducLexer::T_EQUALS_EQUALS => '==']);
         $functions = [];
         foreach ($language->functions as $function) {

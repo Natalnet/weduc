@@ -661,16 +661,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v5.5.19",
+            "version": "v5.5.20",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "c678100e84934ec85c9f8bc26bd0a60222682719"
+                "reference": "ce0019d22a83b1b240330ea4115ae27a4d75d79c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/c678100e84934ec85c9f8bc26bd0a60222682719",
-                "reference": "c678100e84934ec85c9f8bc26bd0a60222682719",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/ce0019d22a83b1b240330ea4115ae27a4d75d79c",
+                "reference": "ce0019d22a83b1b240330ea4115ae27a4d75d79c",
                 "shasum": ""
             },
             "require": {
@@ -752,7 +752,7 @@
                 "nexmo/client": "Required to use the Nexmo transport (~1.0).",
                 "pda/pheanstalk": "Required to use the beanstalk queue driver (~3.0).",
                 "predis/predis": "Required to use the redis cache and queue drivers (~1.0).",
-                "pusher/pusher-php-server": "Required to use the Pusher broadcast driver (~2.0).",
+                "pusher/pusher-php-server": "Required to use the Pusher broadcast driver (~3.0).",
                 "symfony/css-selector": "Required to use some of the crawler integration testing tools (~3.3).",
                 "symfony/dom-crawler": "Required to use most of the crawler integration testing tools (~3.3).",
                 "symfony/psr-http-message-bridge": "Required to psr7 bridging features (~1.0)."
@@ -788,7 +788,7 @@
                 "framework",
                 "laravel"
             ],
-            "time": "2017-10-25T19:10:45+00:00"
+            "time": "2017-11-07T14:24:50+00:00"
         },
         {
             "name": "laravel/tinker",
@@ -1125,12 +1125,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Natalnet/relex.git",
-                "reference": "76bbee555d71cc7e6c847882d807c42723b97ca1"
+                "reference": "428f1586d6f9c1af85c72309f621238966d0f68b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Natalnet/relex/zipball/76bbee555d71cc7e6c847882d807c42723b97ca1",
-                "reference": "76bbee555d71cc7e6c847882d807c42723b97ca1",
+                "url": "https://api.github.com/repos/Natalnet/relex/zipball/428f1586d6f9c1af85c72309f621238966d0f68b",
+                "reference": "428f1586d6f9c1af85c72309f621238966d0f68b",
                 "shasum": ""
             },
             "require": {
@@ -1164,7 +1164,7 @@
                 "source": "https://github.com/Natalnet/relex/tree/master",
                 "issues": "https://github.com/Natalnet/relex/issues"
             },
-            "time": "2017-11-01T14:03:08+00:00"
+            "time": "2017-11-09T15:32:50+00:00"
         },
         {
             "name": "nesbot/carbon",
@@ -1769,16 +1769,16 @@
         },
         {
             "name": "spatie/laravel-medialibrary",
-            "version": "6.6.1",
+            "version": "6.6.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/laravel-medialibrary.git",
-                "reference": "1ca1c39126bfe6035ec99f149480b9aa214e80b0"
+                "reference": "36f25439883d2f15b0afe81e31e788f87bca481b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/laravel-medialibrary/zipball/1ca1c39126bfe6035ec99f149480b9aa214e80b0",
-                "reference": "1ca1c39126bfe6035ec99f149480b9aa214e80b0",
+                "url": "https://api.github.com/repos/spatie/laravel-medialibrary/zipball/36f25439883d2f15b0afe81e31e788f87bca481b",
+                "reference": "36f25439883d2f15b0afe81e31e788f87bca481b",
                 "shasum": ""
             },
             "require": {
@@ -1845,7 +1845,7 @@
                 "media",
                 "spatie"
             ],
-            "time": "2017-11-02T11:39:07+00:00"
+            "time": "2017-11-07T07:58:40+00:00"
         },
         {
             "name": "spatie/laravel-permission",
@@ -3792,16 +3792,16 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "6.4.3",
+            "version": "6.4.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "06b28548fd2b4a20c3cd6e247dc86331a7d4db13"
+                "reference": "562f7dc75d46510a4ed5d16189ae57fbe45a9932"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/06b28548fd2b4a20c3cd6e247dc86331a7d4db13",
-                "reference": "06b28548fd2b4a20c3cd6e247dc86331a7d4db13",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/562f7dc75d46510a4ed5d16189ae57fbe45a9932",
+                "reference": "562f7dc75d46510a4ed5d16189ae57fbe45a9932",
                 "shasum": ""
             },
             "require": {
@@ -3872,7 +3872,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2017-10-16T13:18:59+00:00"
+            "time": "2017-11-08T11:26:09+00:00"
         },
         {
             "name": "phpunit/phpunit-mock-objects",
