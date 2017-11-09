@@ -33,6 +33,9 @@
                         </li>
                     </ul>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url('/log-viewer') }}"><i class="fa fa-archive"></i> Logs</a>
+                </li>
                 <li class="divider"></li>
             @endrole
             <li class="nav-item mt-auto">
