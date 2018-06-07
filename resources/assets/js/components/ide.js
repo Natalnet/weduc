@@ -81,17 +81,23 @@ Vue.component('ide', {
                 language: this.language.id
             })
             .then(response => {
-                this.errors = ''
-                this.program.customCode = response.data.translatedCode
-                this.$notify({
-                    group: 'ide',
-                    type: 'success',
-                    title: 'Programa compilado com sucesso!',
-                    text: 'O seu programa foi compilado com sucesso!'
-                });
+                if (response.data.compiled) {
+                    this.errors = ''
+                    this.program.customCode = response.data.translatedCode
+                    this.$notify({
+                        group: 'ide',
+                        type: 'success',
+                        title: 'Programa compilado com sucesso!',
+                        text: 'O seu programa foi compilado com sucesso!'
+                    });
+                } else {
+                    console.log(response.data);
+                    this.errors = response.data.errors[0].message
+                }
             })
             .catch(error => {
-                this.errors = error.response.data.message
+                console.log(error.response.data);
+                this.errors = error.response.data.errors.message
             })
         },
 

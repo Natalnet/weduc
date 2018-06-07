@@ -49477,16 +49477,22 @@ Vue.component('ide', {
                 code: this.program.code,
                 language: this.language.id
             }).then(function (response) {
-                _this4.errors = '';
-                _this4.program.customCode = response.data.translatedCode;
-                _this4.$notify({
-                    group: 'ide',
-                    type: 'success',
-                    title: 'Programa compilado com sucesso!',
-                    text: 'O seu programa foi compilado com sucesso!'
-                });
+                if (response.data.compiled) {
+                    _this4.errors = '';
+                    _this4.program.customCode = response.data.translatedCode;
+                    _this4.$notify({
+                        group: 'ide',
+                        type: 'success',
+                        title: 'Programa compilado com sucesso!',
+                        text: 'O seu programa foi compilado com sucesso!'
+                    });
+                } else {
+                    console.log(response.data);
+                    _this4.errors = response.data.errors[0].message;
+                }
             }).catch(function (error) {
-                _this4.errors = error.response.data.message;
+                console.log(error.response.data);
+                _this4.errors = error.response.data.errors.message;
             });
         },
         compileTarget: function compileTarget() {
