@@ -10,6 +10,7 @@ use Natalnet\Relex\FunctionSymbol;
 use Natalnet\Relex\ReducLexer;
 use Natalnet\Relex\ReducParser;
 use Natalnet\Relex\Translator\Translator;
+use Natalnet\Relex\Types;
 
 class ProgramController extends Controller
 {
@@ -45,47 +46,87 @@ class ProgramController extends Controller
             for ($i = 0; $i < count($matches[1]); $i++) {
                 switch ($matches[1][$i]) {
                     case 'int':
-                        $parameters[] = ReducLexer::T_NUMBER;
+                        $parameters[] = Types::NUMBER_TYPE;
                         break;
                     case 'String':
-                        $parameters[] = ReducLexer::T_STRING;
+                        $parameters[] = Types::STRING_TYPE;
                         break;
                     case 'boolean':
-                        $parameters[] = ReducLexer::T_BOOLEAN;
+                        $parameters[] = Types::BOOLEAN_TYPE;
                         break;
                 }
             }
-            $parser->symbolTable->define(new FunctionSymbol($function->name, null, $parameters));
+            $returnType = null;
+            switch ($function->return_type) {
+                case 'float':
+                    $returnType = Types::NUMBER_TYPE;
+                    break;
+                case 'String':
+                    $returnType = Types::STRING_TYPE;
+                    break;
+                case 'boolean':
+                    $returnType = Types::BOOLEAN_TYPE;
+                    break;
+            }
+            $parser->symbolTable->define(new FunctionSymbol($function->name, $returnType, $parameters));
         }
 
-        // try {
-        $parser->program();
-        // } catch (\Exception $e) {
-        //     // report($e);
-        //     return response()->json([
-        //         'compiled' => false,
-        //         'errors' => [
-        //             'message' => $e->getMessage()
-        //         ]
-        //     ]);
-        // }
+        try {
+            $parser->program();
+        } catch (\Exception $e) {
+            // report($e);
+            return response()->json([
+                'compiled' => false,
+                'errors' => [
+                    'message' => $e->getMessage()
+                ]
+            ], 422);
+        }
         $trans = new Translator($parser->parseTree);
         $trans->setMainFunction($language->main_function);
+        $trans->setInstructionSeparator(';');
         $controlFlow = $language->controlFlowStatements()->first();
         $statements = [
             'ifStatement' => $controlFlow->if_code,
-            'repeatStatement' => $controlFlow->repeat_code
+            'repeatStatement' => $controlFlow->repeat_code,
+            'whileStatement' => $controlFlow->while_code
         ];
-        $trans->setControlFlowStatements($statements);
-        $trans->setOperators([ReducLexer::T_EQUALS_EQUALS => '==']);
+        //$trans->setControlFlowStatements($statements);
+        $trans->setIfStatement($controlFlow->if_code);
+        $trans->setElseIfStatement($controlFlow->else_if);
+        $trans->setElseStatement($controlFlow->else);
+        $trans->setRepeatStatement($controlFlow->repeat_code);
+        $trans->setWhileStatement($controlFlow->while_code);
+        $trans->setOperators([
+            ReducLexer::T_E => '&&',
+            ReducLexer::T_OU => '||',
+            ReducLexer::T_NEGATE => '!',
+            ReducLexer::T_EQUALS_EQUALS => '==',
+            ReducLexer::T_NOT_EQUAL => '!=',
+            ReducLexer::T_LESS_THAN => '<',
+            ReducLexer::T_GREATER_THAN => '>',
+            ReducLexer::T_LESS_THAN_EQUAL => '<=',
+            ReducLexer::T_GREATER_THAN_EQUAL => '>=',
+        ]);
+
+        $trans->setVariableDeclarations([
+            Types::NUMBER_TYPE => $language->getDataType('declare_float'),
+            Types::STRING_TYPE => $language->getDataType('declare_string'),
+            Types::BOOLEAN_TYPE => $language->getDataType('declare_boolean'),
+        ]);
+
+
         $functions = [];
         foreach ($language->functions as $function) {
             $functions[$function->name] = $function->code;
         }
         $trans->setFunctions($functions);
+        // $trans->translate();
         $trans->translate();
-        $trans->translate();
-        return ['translatedCode' => $language->header . $trans->getTranslation()];
+        return [
+            'compiled' => true,
+            'translatedCode' => $language->header . $trans->getTranslation()
+        ];
     }
 
     public function translate()
@@ -146,6 +187,8 @@ class ProgramController extends Controller
         $comando = str_replace("diretorio", $dest, $comando);
         $comando = str_replace("localdocompilador", $compiler_path, $comando);
         $comando = str_replace("nomedoprograma", $programName, $comando);
+
+        dd($comando);
 
         Storage::disk('program_files')->put($program->id.'/compilation/'.$programName.'/'.'weduc.sh', $comando);
 
