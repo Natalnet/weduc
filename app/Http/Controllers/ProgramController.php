@@ -35,43 +35,43 @@ class ProgramController extends Controller
 
     public function compile(Request $request)
     {
-        $lexer = new ReducLexer($request->code);
-        $parser = new ReducParser($lexer);
+        try {
+            $lexer = new ReducLexer($request->code);
+            $parser = new ReducParser($lexer);
 
-        $language = ProgrammingLanguage::with('functions')->find($request->language);
+            $language = ProgrammingLanguage::with('functions')->find($request->language);
 
-        foreach ($language->functions as $function) {
-            $parameters = [];
-            preg_match_all('/var[1-9]+\(([a-zA-Z]+)\)/', $function->code, $matches);
-            for ($i = 0; $i < count($matches[1]); $i++) {
-                switch ($matches[1][$i]) {
-                    case 'int':
-                        $parameters[] = Types::NUMBER_TYPE;
+            foreach ($language->functions as $function) {
+                $parameters = [];
+                preg_match_all('/var[1-9]+\(([a-zA-Z]+)\)/', $function->code, $matches);
+                for ($i = 0; $i < count($matches[1]); $i++) {
+                    switch ($matches[1][$i]) {
+                        case 'int':
+                            $parameters[] = Types::NUMBER_TYPE;
+                            break;
+                        case 'String':
+                            $parameters[] = Types::STRING_TYPE;
+                            break;
+                        case 'boolean':
+                            $parameters[] = Types::BOOLEAN_TYPE;
+                            break;
+                    }
+                }
+                $returnType = null;
+                switch ($function->return_type) {
+                    case 'float':
+                        $returnType = Types::NUMBER_TYPE;
                         break;
                     case 'String':
-                        $parameters[] = Types::STRING_TYPE;
+                        $returnType = Types::STRING_TYPE;
                         break;
                     case 'boolean':
-                        $parameters[] = Types::BOOLEAN_TYPE;
+                        $returnType = Types::BOOLEAN_TYPE;
                         break;
                 }
+                $parser->symbolTable->define(new FunctionSymbol($function->name, $returnType, $parameters));
             }
-            $returnType = null;
-            switch ($function->return_type) {
-                case 'float':
-                    $returnType = Types::NUMBER_TYPE;
-                    break;
-                case 'String':
-                    $returnType = Types::STRING_TYPE;
-                    break;
-                case 'boolean':
-                    $returnType = Types::BOOLEAN_TYPE;
-                    break;
-            }
-            $parser->symbolTable->define(new FunctionSymbol($function->name, $returnType, $parameters));
-        }
 
-        try {
             $parser->program();
         } catch (\Exception $e) {
             // report($e);
