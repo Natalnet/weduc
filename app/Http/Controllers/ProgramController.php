@@ -85,28 +85,25 @@ class ProgramController extends Controller
         $trans = new Translator($parser->parseTree);
         $trans->setMainFunction($language->main_function);
         $trans->setInstructionSeparator(';');
+
         $controlFlow = $language->controlFlowStatements()->first();
-        $statements = [
-            'ifStatement' => $controlFlow->if_code,
-            'repeatStatement' => $controlFlow->repeat_code,
-            'whileStatement' => $controlFlow->while_code
-        ];
-        //$trans->setControlFlowStatements($statements);
+
         $trans->setIfStatement($controlFlow->if_code);
         $trans->setElseIfStatement($controlFlow->else_if);
         $trans->setElseStatement($controlFlow->else);
         $trans->setRepeatStatement($controlFlow->repeat_code);
         $trans->setWhileStatement($controlFlow->while_code);
+
         $trans->setOperators([
-            ReducLexer::T_E => '&&',
-            ReducLexer::T_OU => '||',
-            ReducLexer::T_NEGATE => '!',
-            ReducLexer::T_EQUALS_EQUALS => '==',
-            ReducLexer::T_NOT_EQUAL => '!=',
-            ReducLexer::T_LESS_THAN => '<',
-            ReducLexer::T_GREATER_THAN => '>',
-            ReducLexer::T_LESS_THAN_EQUAL => '<=',
-            ReducLexer::T_GREATER_THAN_EQUAL => '>=',
+            ReducLexer::T_E => $language->operators->logical_and,
+            ReducLexer::T_OU => $language->operators->logical_or,
+            ReducLexer::T_NEGATE => $language->operators->logical_not,
+            ReducLexer::T_EQUALS_EQUALS => $language->operators->equals_to,
+            ReducLexer::T_NOT_EQUAL => $language->operators->not_equal_to,
+            ReducLexer::T_LESS_THAN => $language->operators->less_than,
+            ReducLexer::T_GREATER_THAN => $language->operators->greater_than,
+            ReducLexer::T_LESS_THAN_EQUAL => $language->operators->less_than_or_equals_to,
+            ReducLexer::T_GREATER_THAN_EQUAL => $language->operators->greater_than_or_equals_to,
         ]);
 
         $trans->setVariableDeclarations([
