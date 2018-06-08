@@ -22,6 +22,11 @@ class ProgrammingLanguage extends Model implements HasMedia
         return $this->hasOne('App\DataType');
     }
 
+    public function operators()
+    {
+        return $this->hasOne('App\Operator');
+    }
+
     public function functions()
     {
         return $this->hasMany('App\ReducFunction');

@@ -331,7 +331,6 @@
                                     class="form-control"
                                     name="call_function"
                                     id="call_function"
-                                    placeholder="Chamada de função"
                                     rows="6"
                                 >{{ old('call_function', $language->call_function) }}</textarea>
 
@@ -544,12 +543,12 @@
                                     <label>Operadores na Linguagem Alvo</label>
                                     <div class="input-group">
                                         <span class="input-group-addon">e</span>
-                                        <input type="text" name="op-and" class="form-control" value="{{ old('op-and') }}">
+                                        <input type="text" name="op_and" class="form-control" value="{{ old('op_and', $language->operators->logical_and) }}">
                                     </div>
 
-                                    @if ($errors->has('op-and'))
+                                    @if ($errors->has('op_and'))
                                         <div class="invalid-feedback" style="display: block;">
-                                            <strong>{{ $errors->first('op-and') }}</strong>
+                                            <strong>{{ $errors->first('op_and') }}</strong>
                                         </div>
                                     @endif
                                 </div>
@@ -557,12 +556,12 @@
                                 <div class="form-group">
                                     <div class="input-group">
                                         <span class="input-group-addon">ou</span>
-                                        <input type="text" name="op-or" class="form-control" value="{{ old('op-or') }}">
+                                        <input type="text" name="op_or" class="form-control" value="{{ old('op_or', $language->operators->logical_or) }}">
                                     </div>
 
-                                    @if ($errors->has('op-or'))
+                                    @if ($errors->has('op_or'))
                                         <div class="invalid-feedback" style="display: block;">
-                                            <strong>{{ $errors->first('op-or') }}</strong>
+                                            <strong>{{ $errors->first('op_or') }}</strong>
                                         </div>
                                     @endif
                                 </div>
@@ -570,12 +569,12 @@
                                 <div class="form-group">
                                     <div class="input-group">
                                         <span class="input-group-addon">!</span>
-                                        <input type="text" name="op-not" class="form-control" value="{{ old('op-not') }}">
+                                        <input type="text" name="op_not" class="form-control" value="{{ old('op_not', $language->operators->logical_not) }}">
                                     </div>
 
-                                    @if ($errors->has('op-not'))
+                                    @if ($errors->has('op_not'))
                                         <div class="invalid-feedback" style="display: block;">
-                                            <strong>{{ $errors->first('op-not') }}</strong>
+                                            <strong>{{ $errors->first('op_not') }}</strong>
                                         </div>
                                     @endif
                                 </div>
@@ -583,12 +582,12 @@
                                 <div class="form-group">
                                     <div class="input-group">
                                         <span class="input-group-addon">==</span>
-                                        <input type="text" name="op-equals" class="form-control" value="{{ old('op-equals') }}">
+                                        <input type="text" name="op_equals" class="form-control" value="{{ old('op_equals', $language->operators->equals_to) }}">
                                     </div>
 
-                                    @if ($errors->has('op-equals'))
+                                    @if ($errors->has('op_equals'))
                                         <div class="invalid-feedback" style="display: block;">
-                                            <strong>{{ $errors->first('op-equals') }}</strong>
+                                            <strong>{{ $errors->first('op_equals') }}</strong>
                                         </div>
                                     @endif
                                 </div>
@@ -596,12 +595,12 @@
                                 <div class="form-group">
                                     <div class="input-group">
                                         <span class="input-group-addon">!=</span>
-                                        <input type="text" name="op-different" class="form-control" value="{{ old('op-different') }}">
+                                        <input type="text" name="op_different" class="form-control" value="{{ old('op_different', $language->operators->not_equal_to) }}">
                                     </div>
 
-                                    @if ($errors->has('op-different'))
+                                    @if ($errors->has('op_different'))
                                         <div class="invalid-feedback" style="display: block;">
-                                            <strong>{{ $errors->first('op-different') }}</strong>
+                                            <strong>{{ $errors->first('op_different') }}</strong>
                                         </div>
                                     @endif
                                 </div>
@@ -609,12 +608,12 @@
                                 <div class="form-group">
                                     <div class="input-group">
                                         <span class="input-group-addon">></span>
-                                        <input type="text" name="op-greater" class="form-control" value="{{ old('op-greater') }}">
+                                        <input type="text" name="op_greater" class="form-control" value="{{ old('op_greater', $language->operators->greater_than) }}">
                                     </div>
 
-                                    @if ($errors->has('op-greater'))
+                                    @if ($errors->has('op_greater'))
                                         <div class="invalid-feedback" style="display: block;">
-                                            <strong>{{ $errors->first('op-greater') }}</strong>
+                                            <strong>{{ $errors->first('op_greater') }}</strong>
                                         </div>
                                     @endif
                                 </div>
@@ -622,12 +621,12 @@
                                 <div class="form-group">
                                     <div class="input-group">
                                         <span class="input-group-addon">>=</span>
-                                        <input type="text" name="op-greater-equals" class="form-control" value="{{ old('op-greater-equals') }}">
+                                        <input type="text" name="op_greater_equals" class="form-control" value="{{ old('op_greater_equals', $language->operators->greater_than_or_equals_to) }}">
                                     </div>
 
-                                    @if ($errors->has('op-greater-equals'))
+                                    @if ($errors->has('op_greater_equals'))
                                         <div class="invalid-feedback" style="display: block;">
-                                            <strong>{{ $errors->first('op-greater-equals') }}</strong>
+                                            <strong>{{ $errors->first('op_greater_equals') }}</strong>
                                         </div>
                                     @endif
                                 </div>
@@ -635,12 +634,12 @@
                                 <div class="form-group">
                                     <div class="input-group">
                                         <span class="input-group-addon"><</span>
-                                        <input type="text" name="op-less" class="form-control" value="{{ old('op-less') }}">
+                                        <input type="text" name="op_less" class="form-control" value="{{ old('op_less', $language->operators->less_than) }}">
                                     </div>
 
-                                    @if ($errors->has('op-less'))
+                                    @if ($errors->has('op_less'))
                                         <div class="invalid-feedback" style="display: block;">
-                                            <strong>{{ $errors->first('op-less') }}</strong>
+                                            <strong>{{ $errors->first('op_less') }}</strong>
                                         </div>
                                     @endif
                                 </div>
@@ -648,12 +647,12 @@
                                 <div class="form-group">
                                     <div class="input-group">
                                         <span class="input-group-addon"><=</span>
-                                        <input type="text" name="op-less-equals" class="form-control" value="{{ old('op-less-equals') }}">
+                                        <input type="text" name="op_less_equals" class="form-control" value="{{ old('op_less_equals', $language->operators->less_than_or_equals_to) }}">
                                     </div>
 
-                                    @if ($errors->has('op-less-equals'))
+                                    @if ($errors->has('op_less_equals'))
                                         <div class="invalid-feedback" style="display: block;">
-                                            <strong>{{ $errors->first('op-less-equals') }}</strong>
+                                            <strong>{{ $errors->first('op_less_equals') }}</strong>
                                         </div>
                                     @endif
                                 </div>
@@ -732,19 +731,19 @@
                             Nesta sestao você deve definir as estruturas de controle de fluxo da Linguagem Alvo. A linguagem R-Educ possui as seguintes funções de controle de fluxo: se, enquanto, repita, teste, farei, para e sair.
                         </p>
                         <p class="text-muted">
-                            Siga os exemplos abaixo para declarar as estruturas. Observe que cada definição possui um conjunto de palavras reservadas que devem ser utilizadas em cada caso, sendo elas: condicao, comandos1, comandos2, comandos, var, variavel, //teste1, //teste2, //fim, valor1 e passo.
+                            Siga os exemplos abaixo para declarar as estruturas. Observe que cada definição possui um conjunto de palavras reservadas que devem ser utilizadas em cada caso, sendo elas: condicao, comandos, variavel, casos, valor, e passo.
                         </p>
 
                         <div class="row">
                             <div class="form-group col-md-6">
-                                <label for="control-flow-if">Se</label>
-                                <textarea type="text" class="form-control" name="control-flow-if" id="control-flow-if" placeholder="Chamada de função" rows="6">
-                                    {{ old('control-flow-if', $language->controlFlowStatements->if_code) }}
-                                </textarea>
+                                <label for="control_flow_if">Se</label>
+                                <textarea type="text" class="form-control" name="control_flow_if" id="control_flow_if"
+                                          rows="6"
+                                >{{ old('control_flow_if', $language->controlFlowStatements->if_code) }}</textarea>
 
-                                @if ($errors->has('control-flow-if'))
+                                @if ($errors->has('control_flow_if'))
                                     <div class="invalid-feedback" style="display: block;">
-                                        <strong>{{ $errors->first('control-flow-if') }}</strong>
+                                        <strong>{{ $errors->first('control_flow_if') }}</strong>
                                     </div>
                                 @endif
                             </div>
@@ -753,13 +752,13 @@
                                 <div class="card">
                                     <div class="card-block">
                                     <b>Linguagem R-Educ</b>
-                                    <pre><code>se (condicao) entao {<br>    comandos1<br>} senao {<br>    comandos2<br>}</code></pre>
+                                    <pre><code>se (condicao) entao {<br>    comandos<br>}</code></pre>
                                     </div>
                                 </div>
                                 <div class="card">
                                     <div class="card-block">
                                     <b>Linguagem C</b>
-                                    <pre><code>if (condicao) {<br>    comandos1<br>} else {<br>    comandos2<br>}</code></pre>
+                                    <pre><code>if (condicao) {<br>    comandos<br>}</code></pre>
                                     </div>
                                 </div>
                             </div>
@@ -767,14 +766,104 @@
 
                         <div class="row">
                             <div class="form-group col-md-6">
-                                <label for="control-flow-while">Enquanto</label>
-                                <textarea type="text" class="form-control" name="control-flow-while" id="control-flow-while" placeholder="Chamada de função" rows="6">
-                                    {{ old('control-flow-while', $language->controlFlowStatements->while_code) }}
-                                </textarea>
+                                <label for="control_flow_else_if">Senão se</label>
+                                <textarea type="text" class="form-control" name="control_flow_else_if" id="control_flow_else_if"
+                                          rows="6"
+                                >{{ old('control_flow_else_if', $language->controlFlowStatements->else_if) }}</textarea>
 
-                                @if ($errors->has('control-flow-while'))
+                                @if ($errors->has('control_flow_else_if'))
                                     <div class="invalid-feedback" style="display: block;">
-                                        <strong>{{ $errors->first('control-flow-while') }}</strong>
+                                        <strong>{{ $errors->first('control_flow_else_if') }}</strong>
+                                    </div>
+                                @endif
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="card">
+                                    <div class="card-block">
+                                        <b>Linguagem R-Educ</b>
+                                        <pre><code>senao se (condicao) entao {<br>    comandos<br>}</code></pre>
+                                    </div>
+                                </div>
+                                <div class="card">
+                                    <div class="card-block">
+                                        <b>Linguagem C</b>
+                                        <pre><code>else if (condicao) {<br>    comandos1<br>}</code></pre>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="form-group col-md-6">
+                                <label for="control_flow_else">Senão</label>
+                                <textarea type="text" class="form-control" name="control_flow_else" id="control_flow_else"
+                                          rows="6"
+                                >{{ old('control_flow_else', $language->controlFlowStatements->else) }}</textarea>
+
+                                @if ($errors->has('control_flow_else'))
+                                    <div class="invalid-feedback" style="display: block;">
+                                        <strong>{{ $errors->first('control_flow_else') }}</strong>
+                                    </div>
+                                @endif
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="card">
+                                    <div class="card-block">
+                                        <b>Linguagem R-Educ</b>
+                                        <pre><code>senao {<br>    comandos<br>}</code></pre>
+                                    </div>
+                                </div>
+                                <div class="card">
+                                    <div class="card-block">
+                                        <b>Linguagem C</b>
+                                        <pre><code>else {<br>    comandos<br>}</code></pre>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="form-group col-md-6">
+                                <label for="control_flow_repeat">Repita</label>
+                                <textarea type="text" class="form-control" name="control_flow_repeat" id="control_flow_repeat"
+                                          rows="6"
+                                >{{ old('control_flow_repeat', $language->controlFlowStatements->repeat_code) }}</textarea>
+
+                                @if ($errors->has('control_flow_repeat'))
+                                    <div class="invalid-feedback" style="display: block;">
+                                        <strong>{{ $errors->first('control_flow_repeat') }}</strong>
+                                    </div>
+                                @endif
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="card">
+                                    <div class="card-block">
+                                        <b>Linguagem R-Educ</b>
+                                        <pre><code>repita var vezes {<br>    comandos<br>}</code></pre>
+                                    </div>
+                                </div>
+                                <div class="card">
+                                    <div class="card-block">
+                                        <b>Linguagem C</b>
+                                        <pre><code>for (int k = 0; k < var; k++) {<br>    comandos<br>}</code></pre>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="form-group col-md-6">
+                                <label for="control_flow_while">Enquanto</label>
+                                <textarea type="text" class="form-control" name="control_flow_while" id="control_flow_while"
+                                          rows="6"
+                                >{{ old('control_flow_while', $language->controlFlowStatements->while_code) }}</textarea>
+
+                                @if ($errors->has('control_flow_while'))
+                                    <div class="invalid-feedback" style="display: block;">
+                                        <strong>{{ $errors->first('control_flow_while') }}</strong>
                                     </div>
                                 @endif
                             </div>
@@ -797,12 +886,14 @@
 
                         <div class="row">
                             <div class="form-group col-md-6">
-                                <label for="control-flow-repeat">Repita</label>
-                                <textarea type="text" class="form-control" name="control-flow-repeat" id="control-flow-repeat" placeholder="Chamada de função" rows="6">{{ old('control-flow-repeat', $language->controlFlowStatements->repeat_code) }}</textarea>
+                                <label for="control_flow_do">Faça</label>
+                                <textarea type="text" class="form-control" name="control_flow_do" id="control_flow_do"
+                                          rows="6"
+                                >{{ old('control_flow_do', $language->controlFlowStatements->do_code) }}</textarea>
 
-                                @if ($errors->has('control-flow-repeat'))
+                                @if ($errors->has('control_flow_do'))
                                     <div class="invalid-feedback" style="display: block;">
-                                        <strong>{{ $errors->first('control-flow-repeat') }}</strong>
+                                        <strong>{{ $errors->first('control_flow_do') }}</strong>
                                     </div>
                                 @endif
                             </div>
@@ -810,14 +901,74 @@
                             <div class="col-md-6">
                                 <div class="card">
                                     <div class="card-block">
-                                    <b>Linguagem R-Educ</b>
-                                    <pre><code>repita var vezes {<br>    comandos<br>}</code></pre>
+                                        <b>Linguagem R-Educ</b>
+                                        <pre><code>faca {<br>    comandos<br>} enquanto (condicao) </code></pre>
                                     </div>
                                 </div>
                                 <div class="card">
                                     <div class="card-block">
-                                    <b>Linguagem C</b>
-                                    <pre><code>for (int k = 0; k < var; k++) {<br>    comandos<br>}</code></pre>
+                                        <b>Linguagem C</b>
+                                        <pre><code>do {<br>    comandos<br>} while (condicao)</code></pre>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="form-group col-md-6">
+                                <label for="control_flow_switch">Teste</label>
+                                <textarea type="text" class="form-control" name="control_flow_switch" id="control_flow_switch"
+                                          rows="6"
+                                >{{ old('control_flow_switch', $language->controlFlowStatements->switch_code) }}</textarea>
+
+                                @if ($errors->has('control_flow_switch'))
+                                    <div class="invalid-feedback" style="display: block;">
+                                        <strong>{{ $errors->first('control_flow_switch') }}</strong>
+                                    </div>
+                                @endif
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="card">
+                                    <div class="card-block">
+                                        <b>Linguagem R-Educ</b>
+                                        <pre><code>teste (variavel) {<br>    casos<br>    outros:<br>        comandos<br>}</code></pre>
+                                    </div>
+                                </div>
+                                <div class="card">
+                                    <div class="card-block">
+                                        <b>Linguagem C</b>
+                                        <pre><code>switch (variavel) {<br>    casos<br>    default:<br>        comandos<br>        break;<br>}</code></pre>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="form-group col-md-6">
+                                <label for="control_flow_case">Caso</label>
+                                <textarea type="text" class="form-control" name="control_flow_case" id="control_flow_case"
+                                          rows="6"
+                                >{{ old('control_flow_case', $language->controlFlowStatements->case) }}</textarea>
+
+                                @if ($errors->has('control_flow_case'))
+                                    <div class="invalid-feedback" style="display: block;">
+                                        <strong>{{ $errors->first('control_flow_case') }}</strong>
+                                    </div>
+                                @endif
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="card">
+                                    <div class="card-block">
+                                        <b>Linguagem R-Educ</b>
+                                        <pre><code>caso valor:<br>    comandos<br></code></pre>
+                                    </div>
+                                </div>
+                                <div class="card">
+                                    <div class="card-block">
+                                        <b>Linguagem C</b>
+                                        <pre><code>case valor:<br>    comandos<br>    break;</code></pre>
                                     </div>
                                 </div>
                             </div>

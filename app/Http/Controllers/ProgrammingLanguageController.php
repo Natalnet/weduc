@@ -111,6 +111,36 @@ class ProgrammingLanguageController extends Controller
 
         $language->fill($langauge_fields)->save();
 
+        $language->dataType->declare_string = $request->type_string;
+        $language->dataType->declare_float = $request->type_float;
+        $language->dataType->declare_boolean = $request->type_boolean;
+        $language->dataType->declare_true = $request->type_true;
+        $language->dataType->declare_false = $request->type_false;
+        $language->dataType->save();
+
+        $language->operators->equals_to = $request->op_equals;
+        $language->operators->not_equal_to = $request->op_different;
+        $language->operators->greater_than = $request->op_greater;
+        $language->operators->greater_than_or_equals_to = $request->op_greater_equals;
+        $language->operators->less_than = $request->op_less;
+        $language->operators->less_than_or_equals_to = $request->op_less_equals;
+        $language->operators->logical_and = $request->op_and;
+        $language->operators->logical_or = $request->op_or;
+        $language->operators->logical_not = $request->op_not;
+        $language->operators->save();
+
+        $language->controlFlowStatements->break_code = $request->control_flow_break;
+        $language->controlFlowStatements->do_code = $request->control_flow_do;
+        $language->controlFlowStatements->for_code = $request->control_flow_for;
+        $language->controlFlowStatements->if_code = $request->control_flow_if;
+        $language->controlFlowStatements->else_if = $request->control_flow_else_if;
+        $language->controlFlowStatements->else = $request->control_flow_else;
+        $language->controlFlowStatements->repeat_code = $request->control_flow_repeat;
+        $language->controlFlowStatements->switch_code = $request->control_flow_switch;
+        $language->controlFlowStatements->case = $request->control_flow_case;
+        $language->controlFlowStatements->while_code = $request->control_flow_while;
+        $language->controlFlowStatements->save();
+
         return redirect()->route('languages.by-user');
     }
 
