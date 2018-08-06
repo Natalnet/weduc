@@ -19,4 +19,9 @@ class LanguageController extends Controller
 
         return $languages;
     }
+
+    public function functions(ProgrammingLanguage $language)
+    {
+        return $language->functions;
+    }
 }

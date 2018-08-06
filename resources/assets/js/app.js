@@ -30,7 +30,7 @@ Vue.use(Notifications);
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-// Vue.component('ide', require('./components/IDE.vue'));
+Vue.component('reduc-functions', require('./components/ReducFunctions'));
 require('./components/ide');
 require('./components/editor');
 

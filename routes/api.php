@@ -18,6 +18,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::get('/languages/', 'API\LanguageController@index');
+Route::get('/languages/{language}/functions', 'API\LanguageController@functions');
 
 Route::post('/programs/', 'API\ProgramController@store');
 Route::get('/programs/user/current', 'API\ProgramController@indexForCurrentUser');
