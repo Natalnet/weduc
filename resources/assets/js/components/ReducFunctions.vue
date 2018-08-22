@@ -5,7 +5,7 @@
         </div>
 
         <!-- List group -->
-        <ul class="list-group list-group-flush" style="max-height: 380px; overflow-y: scroll;">
+        <ul class="list-group list-group-flush" style="max-height: 430px; overflow-y: scroll;">
             <li v-for="item of functions" class="list-group-item">
                 <a href="#" data-toggle="modal" :data-target="'#func-' + item.id">
                     {{ item.name }}
