@@ -7,6 +7,7 @@ use App\ProgrammingLanguage;
 use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Validation\Rule;
 use Natalnet\Relex\FunctionSymbol;
 use Natalnet\Relex\ReducLexer;
 use Natalnet\Relex\ReducParser;
@@ -34,7 +35,12 @@ class ProgramController extends Controller
     {
         $request->validate([
             'target_language' => 'required|exists:programming_languages,id',
-            'name' => 'required',
+            'name' => [
+                'required',
+                Rule::unique('programs')->where(function ($query) {
+                    return $query->where('user_id', auth()->id());
+                })
+            ],
             'reduc_code' => 'required_without:custom_code|required_if:custom_code,null',
             'custom_code' => 'required_if:reduc_code,null',
         ]);
@@ -47,6 +53,22 @@ class ProgramController extends Controller
         $program->custom_code = $request->custom_code;
 
         return $language->programs()->save($program);
+    }
+
+    public function update(Request $request, Program $program)
+    {
+        $request->validate([
+            'name' => 'required',
+            'reduc_code' => 'required_without:custom_code|required_if:custom_code,null',
+            'custom_code' => 'required_if:reduc_code,null',
+        ]);
+
+        $program->name = $request->name;
+        $program->reduc_code = $request->reduc_code;
+        $program->custom_code = $request->custom_code;
+        $program->save();
+
+        return response(null, 204);
     }
 
     public function compile(Request $request, Program $program)

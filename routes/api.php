@@ -23,4 +23,5 @@ Route::get('/languages/{language}/functions', 'API\LanguageController@functions'
 Route::post('/programs/', 'API\ProgramController@store');
 Route::get('/programs/user/current', 'API\ProgramController@indexForCurrentUser');
 Route::get('/programs/user/{user}', 'API\ProgramController@indexForUser');
+Route::put('/programs/{program}', 'API\ProgramController@update');
 Route::get('/programs/{program}/compile', 'API\ProgramController@compile');
