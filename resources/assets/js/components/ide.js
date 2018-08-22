@@ -12,7 +12,8 @@ Vue.component('ide', {
                 customCode: ""
             },
             disableNameInput: 0,
-            blockly: false
+            blockly: false,
+            mode: 'reduc'
         };
     },
 
@@ -39,12 +40,29 @@ Vue.component('ide', {
     },
 
     computed: {
+        programExists() {
+            return this.program.id !== "";
+        },
+
         downloadUrl() {
             return "/program/" + this.program.id + "/send_code"
         }
     },
 
     methods: {
+        setBlocklyMode() {
+            this.mode = 'blockly';
+            this.setupBlockly();
+        },
+
+        setReducMode() {
+            this.mode = 'reduc'
+        },
+
+        setTargetMode() {
+            this.mode = 'target'
+        },
+
         loadLanguage(value) {
             axios.get('/fetchlanguage/'+value)
             .then(response => {
@@ -75,15 +93,77 @@ Vue.component('ide', {
             }
         },
 
+        save() {
+            if (this.programExists) {
+                this.update();
+            } else {
+                this.create();
+            }
+        },
+
+        create() {
+            axios.post('/api/programs', {
+                target_language: this.language.id,
+                name: this.program.name,
+                reduc_code: this.program.code,
+                custom_code: this.program.customCode
+            })
+            .then(response => {
+                this.$emit('program-created');
+                this.$notify({
+                    group: 'ide',
+                    type: 'success',
+                    title: 'Programa salvo com sucesso!',
+                    text: 'O seu programa foi salvo com sucesso!'
+                });
+            })
+            .catch(error => {
+                var message = error.response.data.errors && error.response.data.errors.name ?
+                    error.response.data.errors.name[0] : 'Ocorreu um erro inesperado ao salvar o programa.';
+                this.$notify({
+                    group: 'ide',
+                    type: 'error',
+                    title: 'Erro ao salvar programa!',
+                    text: message
+                });
+            })
+        },
+
+        update() {
+            axios.put('/api/programs/' + this.program.id,{
+                name: this.program.name,
+                reduc_code: this.program.code
+            })
+            .then(response => {
+                this.$emit('program-created');
+                this.$notify({
+                    group: 'ide',
+                    type: 'success',
+                    title: 'Programa salvo com sucesso!',
+                    text: 'O seu programa foi salvo com sucesso!'
+                });
+            })
+            .catch(error => {
+                this.$notify({
+                    group: 'ide',
+                    type: 'error',
+                    title: 'Erro ao salvar programa!',
+                    text: 'Ocorreu um erro inesperado ao salvar o programa.'
+                });
+            })
+        },
+
         compile() {
-            axios.post('/compilar',{
+            this.update();
+
+            axios.get('/api/programs/' + this.program.id + '/compile',{
                 code: this.program.code,
                 language: this.language.id
             })
             .then(response => {
-                if (response.data.compiled) {
+                if (response.data.success) {
                     this.errors = ''
-                    this.program.customCode = response.data.translatedCode
+                    this.program.customCode = response.data.target_code
                     this.$notify({
                         group: 'ide',
                         type: 'success',
@@ -92,12 +172,12 @@ Vue.component('ide', {
                     });
                 } else {
                     console.log(response.data);
-                    this.errors = response.data.errors[0].message
+                    this.errors = response.data.errors.reduc_code.message
                 }
             })
             .catch(error => {
                 console.log(error.response.data);
-                this.errors = error.response.data.errors.message
+                this.errors = error.response.data.errors.reduc_code.message
             })
         },
 
@@ -148,81 +228,12 @@ Vue.component('ide', {
             this.disableNameInput = 1
         },
 
-        save() {
-            if (this.program.id) {
-                axios.put('/program/'+this.program.id,{
-                    code: this.program.code,
-                    custom_code: this.program.customCode
-                })
-                .then(response => {
-                    this.$notify({
-                        group: 'ide',
-                        type: 'success',
-                        title: 'Programa salvo com sucesso!',
-                        text: 'O seu programa foi salvo com sucesso!'
-                    });
-                })
-                .catch(error => {
-                    this.$notify({
-                        group: 'ide',
-                        type: 'error',
-                        title: 'Erro ao salvar programa!',
-                        text: 'Ocorreu um erro inesperado ao salvar o programa.'
-                    });
-                })
-            } else if (this.isNameAvailable(this.program.name)) {
-                axios.post('/program',{
-                    language: this.language.id,
-                    name: this.program.name,
-                    code: this.program.code,
-                    custom_code: this.program.customCode
-                })
-                .then(response => {
-                    program = response.data
-                    this.program.id = program.id
-                    this.disableNameInput = 1
-
-                    this.language.programs.push(program)
-
-                    this.$notify({
-                        group: 'ide',
-                        type: 'success',
-                        title: 'Programa salvo com sucesso!',
-                        text: 'O seu programa foi salvo com sucesso!'
-                    });
-                })
-                .catch(error => {
-                    this.$notify({
-                        group: 'ide',
-                        type: 'error',
-                        title: 'Erro ao salvar programa!',
-                        text: 'Ocorreu um erro inesperado ao salvar o programa.'
-                    });
-                })
-            } else {
-                this.$notify({
-                    group: 'ide',
-                    type: 'error',
-                    title: 'Erro ao salvar programa!',
-                    text: 'O nome do programa já está em uso.'
-                });
-            }
-        },
-
-        isNameAvailable(name) {
-            for (program of this.language.programs){
-                if (name == program.name) {
-                    return false
-                }
-            }
-            return true
-        },
-
         newProgram() {
             this.program.id = ""
             this.program.name = "NovoPrograma"
             this.program.code = ""
             this.program.customCode = ""
+            this.errors = ""
             this.disableNameInput = 0
             this.$notify({
                 group: 'ide',

@@ -60,8 +60,11 @@
     },
     "repositories": [
         {
-            "type": "vcs",
-            "url": "https://github.com/natalnet/relex"
+            "type": "path",
+	    "url": "../../Packages/relex",
+	    "options": {
+                "symlink": true
+            }
         }
     ]
 }
