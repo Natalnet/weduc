@@ -50151,7 +50151,7 @@ Vue.component('ide', {
                 }
             }).catch(function (error) {
                 console.log(error.response.data);
-                _this6.errors = error.response.data.errors.reduc_code.message;
+                _this6.errors = "Linha " + error.response.data.errors.reduc_code.line + ": " + error.response.data.errors.reduc_code.message;
             });
         },
         compileTarget: function compileTarget() {

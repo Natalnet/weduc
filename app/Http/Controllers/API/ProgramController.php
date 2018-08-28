@@ -8,6 +8,10 @@ use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Validation\Rule;
+use Natalnet\Relex\Exceptions\InvalidCharacterException;
+use Natalnet\Relex\Exceptions\SymbolNotDefinedException;
+use Natalnet\Relex\Exceptions\TypeMismatchException;
+use Natalnet\Relex\Exceptions\UnexpectedTokenException;
 use Natalnet\Relex\FunctionSymbol;
 use Natalnet\Relex\ReducLexer;
 use Natalnet\Relex\ReducParser;
@@ -109,12 +113,7 @@ class ProgramController extends Controller
             $trans->setMainFunction($language->main_function);
             $trans->setInstructionSeparator(';');
             $controlFlow = $language->controlFlowStatements()->first();
-            $statements = [
-                'ifStatement' => $controlFlow->if_code,
-                'repeatStatement' => $controlFlow->repeat_code,
-                'whileStatement' => $controlFlow->while_code
-            ];
-            //$trans->setControlFlowStatements($statements);
+
             $trans->setIfStatement($controlFlow->if_code);
             $trans->setElseIfStatement($controlFlow->else_if);
             $trans->setElseStatement($controlFlow->else);
@@ -148,12 +147,28 @@ class ProgramController extends Controller
             $program->custom_code = $language->header . $trans->getTranslation() . $language->footer;
             $program->save();
         } catch (\Exception $e) {
+            if ($e instanceof InvalidCharacterException) {
+                $line = $e->codeLine;
+                $message = "Caractere inválido: $e->character";
+            } elseif ($e instanceof SymbolNotDefinedException) {
+                $line = $e->codeLine;
+                $message = "Símbolo não definido. Definição não encontrada para '$e->symbolName'";
+            } elseif ($e instanceof TypeMismatchException) {
+                $line = $e->codeLine;
+                $message = "Tipos incompatíveis. Esperado: $e->expectedType, encontrado: $e->foundType";
+            } elseif ($e instanceof UnexpectedTokenException) {
+                $line = $e->codeLine;
+                $message = "Token não esperado. Esperado: $e->expectedToken, encontrado: $e->foundToken";
+            } else {
+                $line = 0;
+                $message = $e->getMessage();
+            }
             return response()->json([
                 'message' => 'The compilation failed.',
                 'errors' => [
                     'reduc_code' => [
-                        'line' => 1,
-                        'message' => $e->getMessage()
+                        'line' => $line,
+                        'message' => $message
                     ]
                 ]
             ], 422);

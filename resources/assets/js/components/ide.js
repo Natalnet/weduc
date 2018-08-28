@@ -177,7 +177,7 @@ Vue.component('ide', {
             })
             .catch(error => {
                 console.log(error.response.data);
-                this.errors = error.response.data.errors.reduc_code.message
+                this.errors = "Linha " + error.response.data.errors.reduc_code.line + ": " +  error.response.data.errors.reduc_code.message
             })
         },
 
