@@ -50023,6 +50023,12 @@ Vue.component('ide', {
         programExists: function programExists() {
             return this.program.id !== "";
         },
+        targetCanCompile: function targetCanCompile() {
+            return this.language.compile_code !== null;
+        },
+        targetCanSend: function targetCanSend() {
+            return this.language.send_code !== null;
+        },
         downloadUrl: function downloadUrl() {
             return "/program/" + this.program.id + "/send_code";
         }

@@ -44,6 +44,14 @@ Vue.component('ide', {
             return this.program.id !== "";
         },
 
+        targetCanCompile() {
+            return this.language.compile_code !== null;
+        },
+
+        targetCanSend() {
+            return this.language.send_code !== null;
+        },
+
         downloadUrl() {
             return "/program/" + this.program.id + "/send_code"
         }

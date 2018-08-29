@@ -82,10 +82,13 @@
                                 <button class="btn btn-outline-info" @click="save">
                                     <i class="fa fa-floppy-o" aria-hidden="true"></i> Salvar
                                 </button>
-                                <button v-if="programExists" class="btn btn-outline-warning" @click="compile">
+                                <button v-if="programExists && mode === 'reduc'" class="btn btn-outline-warning" @click="compile">
                                     <i class="fa fa-code" aria-hidden="true"></i> Compilar
                                 </button>
-                                <a v-if="programExists" :href="downloadUrl" class="btn btn-outline-success" target="_blank" v-if="disableNameInput == true">
+                                <button v-if="programExists && mode === 'target' && targetCanCompile" class="btn btn-outline-warning" @click="compile">
+                                    <i class="fa fa-code" aria-hidden="true"></i> Compilar Alvo
+                                </button>
+                                <a v-if="programExists && targetCanSend" :href="downloadUrl" class="btn btn-outline-success" target="_blank" v-if="disableNameInput == true">
                                     <i class="fa fa-paper-plane-o" aria-hidden="true"></i> Enviar
                                 </a>
                                 <button class="btn btn-outline-primary" title="Solicitar Correção" disabled="disabled">
@@ -117,7 +120,7 @@
                     </div>
                     <div class="col-lg-12">
                         <div class="card" :class="{ 'border-danger': errors }">
-                            <editor v-if="mode === 'reduc'" editor-id="editor1" :content="program.code" v-on:new-content="updateCode"></editor>
+                            <editor v-if="mode === 'reduc'" editor-id="editor1" :content="program.code" @new-content="updateCode"></editor>
                             <editor v-else-if="mode === 'target'" editor-id="editor2" :content="program.customCode" @new-content="updateCustomCode"></editor>
                             <div class="card-footer">
                                 <div id="comp-result">
