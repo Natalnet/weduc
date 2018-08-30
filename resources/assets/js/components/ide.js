@@ -85,11 +85,15 @@ Vue.component('ide', {
                     toolbox: document.getElementById('toolbox')
                 })
 
-                myUpdateFunction = event => {
+                var self = this;
+
+                function myUpdateFunction() {
                     var code = Blockly.Reduc.workspaceToCode(workspace);
-                    this.updateCode(code)
-                    $('#thecode').html(code);
+                    self.updateCode(code)
+                    // $('#thecode').html(code);
                 }
+
+                console.log(myUpdateFunction);
 
                 workspace.addChangeListener(myUpdateFunction);
 

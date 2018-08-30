@@ -1,7 +1,18 @@
 <header class="app-header navbar">
-    <button class="navbar-toggler mobile-sidebar-toggler d-lg-none mr-auto" type="button">☰</button>
-    <a class="navbar-brand text-center" href="{{ route('home') }}" style="background-image: none;">Weduc</a>
-    <button class="navbar-toggler sidebar-toggler d-md-down-none" type="button">☰</button>
+    {{--<button class="navbar-toggler mobile-sidebar-toggler d-lg-none mr-auto" type="button">☰</button>--}}
+    <button class="navbar-toggler sidebar-toggler d-lg-none mr-auto" type="button" data-toggle="sidebar-show">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+{{--    <a class="navbar-brand text-center" href="{{ route('home') }}" style="background-image: none;">Weduc</a>--}}
+    <a class="navbar-brand" href="{{ route('home') }}">
+        {{--<img class="navbar-brand-full" src="img/brand/logo.svg" width="89" height="25" alt="Weduc">--}}
+        {{--<img class="navbar-brand-minimized" src="img/brand/sygnet.svg" width="30" height="30" alt="Weduc">--}}
+        Weduc
+    </a>
+    {{--<button class="navbar-toggler sidebar-toggler d-md-down-none" type="button">☰</button>--}}
+    <button class="navbar-toggler sidebar-toggler d-md-down-none" type="button" data-toggle="sidebar-lg-show">
+        <span class="navbar-toggler-icon"></span>
+    </button>
 
     <ul class="nav navbar-nav d-md-down-none">
         @hasrole('admin')
@@ -44,6 +55,11 @@
             </li>
         @endguest
     </ul>
-    <button class="navbar-toggler aside-menu-toggler" type="button">☰</button>
+    <button class="navbar-toggler aside-menu-toggler d-md-down-none" type="button" data-toggle="aside-menu-lg-show">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <button class="navbar-toggler aside-menu-toggler d-lg-none" type="button" data-toggle="aside-menu-show">
+        <span class="navbar-toggler-icon"></span>
+    </button>
 
 </header>

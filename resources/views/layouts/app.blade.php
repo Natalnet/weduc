@@ -52,7 +52,7 @@
 
 -->
 
-<body class="app header-fixed sidebar-fixed aside-menu-fixed aside-menu-hidden">
+<body class="app header-fixed sidebar-fixed aside-menu-fixed aside-menu-off-canvas sidebar-lg-show">
     <div id="app">
         @include('parts.header')
 
@@ -80,7 +80,7 @@
 
     <!-- Plugins and scripts required by all views -->
     {{-- <script src="node_modules/chart.js/dist/Chart.min.js"></script> --}}
-    <script src="http://coreui.io/demo/Static_Demo/vendors/js/Chart.min.js"></script>
+    {{--<script src="http://coreui.io/demo/Static_Demo/vendors/js/Chart.min.js"></script>--}}
 
 
     <!-- Plugins and scripts required by this views -->

@@ -78,7 +78,7 @@
                     <div class="col-lg-12 mb-3">
                         <div class="input-group bg-white">
                             <input class="form-control" type="text" id="nome-do-programa" v-model="program.name" :disabled="disableNameInput == true">
-                            <span class="input-group-btn">
+                            <span class="input-group-append">
                                 <button class="btn btn-outline-info" @click="save">
                                     <i class="fa fa-floppy-o" aria-hidden="true"></i> Salvar
                                 </button>
@@ -100,10 +100,10 @@
                                 <button class="btn btn-outline-primary" id="btn-new" @click="newProgram" title="Novo">
                                     <i class="fa fa-file-o" aria-hidden="true"></i>
                                 </button>
-                                <div class="dropdown">
-                                    <a class="btn btn-outline-primary dropdown-toggle" href="#" role="button"
+                                <div class="btn-group b-dropdown dropdown">
+                                    <a class="btn btn-outline-primary btn-square dropdown-toggle" href="#" role="button"
                                        id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-                                       style="border: 1px solid #c2cfd6; margin-left: -1px;">
+                                       style="margin-left: -1px;">
                                         <i class="fa fa-folder-open-o" aria-hidden="true"></i>
                                     </a>
                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">

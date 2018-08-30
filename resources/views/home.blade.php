@@ -23,6 +23,12 @@
                     <a href="{{ route('program') }}" class="btn btn-primary">Comece a programar aqui!</a>
                 </div>
             </div>
+            <div class="card card-accent-primary">
+                <div class="card-body">
+                </div>
+            </div>
+
+            <loading-card></loading-card>
         </div>
     </div>
 </div>

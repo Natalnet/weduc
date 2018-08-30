@@ -7,7 +7,10 @@
 
 // Bootstrap
 // @import "~bootstrap-sass/assets/stylesheets/bootstrap";
-@import "coreui";
+
+// Coreui
+@import "~@coreui/coreui/scss/coreui";
+@import "custom";
 
 // /* Import Font Awesome Icons Set */
 $fa-font-path: '~font-awesome/fonts/';
