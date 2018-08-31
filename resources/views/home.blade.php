@@ -21,16 +21,22 @@
                             {{ session('status') }}
                         </div>
                     @endif
-
-                    <h4>
-                        @auth
-                            Olá {{auth()->user()->name}}!
-                        @endauth
-                        Seja bem vindo ao Weduc!
-                    </h4>
-                    <hr>
-                    <p>Este é um ambiente completo para robótica educacional. Aqui você pode programar diversos robôs, discutir sobre robótica no nosso fórum, ser acompanhado por professores de robótica de todo o mundo e muito mais!</p>
-                    <a href="{{ route('program') }}" class="btn btn-primary">Comece a programar aqui!</a>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <img src="{{ asset('images/welcome-robot.png') }}" width="100%" alt="Welcome Robot">
+                        </div>
+                        <div class="col-md-9">
+                            <h4>
+                                @auth
+                                    Olá {{auth()->user()->name}}!
+                                @endauth
+                                Seja bem vindo ao Weduc!
+                            </h4>
+                            <hr>
+                            <p>Este é um ambiente completo para robótica educacional. Aqui você pode programar diversos robôs, discutir sobre robótica no nosso fórum, ser acompanhado por professores de robótica de todo o mundo e muito mais!</p>
+                            <a href="{{ route('program') }}" class="btn btn-primary">Comece a programar aqui!</a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
