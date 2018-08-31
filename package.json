@@ -11,7 +11,7 @@
     },
     "devDependencies": {
         "@coreui/coreui": "^2.0.4",
-        "axios": "^0.16.2",
+        "axios": "^0.18",
         "babel-helper-vue-jsx-merge-props": "^2.0.3",
         "babel-plugin-syntax-jsx": "^6.18.0",
         "babel-plugin-transform-vue-jsx": "^3.7.0",
@@ -23,14 +23,14 @@
         "cross-env": "^5.0.1",
         "font-awesome": "^4.7.0",
         "jquery": "^3.3.1",
-        "laravel-mix": "^1.0",
+        "laravel-mix": "^2.0",
         "lodash": "^4.17.4",
         "numeral": "^2.0.6",
         "pace-progress": "^1.0.2",
         "perfect-scrollbar": "^1.4.0",
         "popper.js": "^1.14.4",
         "simple-line-icons": "^2.4.1",
-        "vue": "^2.1.10"
+        "vue": "^2.5.7"
     },
     "dependencies": {
         "npm": "^5.8.0",

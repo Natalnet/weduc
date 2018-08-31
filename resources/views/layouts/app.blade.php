@@ -52,8 +52,8 @@
 
 -->
 
-<body class="app header-fixed sidebar-fixed aside-menu-fixed aside-menu-off-canvas sidebar-lg-show">
-    <div id="app">
+<body class="header-fixed sidebar-fixed aside-menu-fixed sidebar-lg-show">
+    <div id="app" class="app">
         @include('parts.header')
 
         <div class="app-body">
@@ -66,8 +66,6 @@
             </main>
 
             @include('parts.aside')
-
-
         </div>
 
         @include('parts.footer')
@@ -77,19 +75,7 @@
     <script src="{{ asset('js/app.js') }}"></script>
     <script src="/js/sweetalert2.min.js"></script>
 
-
-    <!-- Plugins and scripts required by all views -->
-    {{-- <script src="node_modules/chart.js/dist/Chart.min.js"></script> --}}
-    {{--<script src="http://coreui.io/demo/Static_Demo/vendors/js/Chart.min.js"></script>--}}
-
-
-    <!-- Plugins and scripts required by this views -->
-
-
-    <!-- Custom scripts required by this view -->
-    {{-- <script src="js/views/main.js"></script> --}}
     @stack('bottom-scripts')
-
 </body>
 
 </html>
