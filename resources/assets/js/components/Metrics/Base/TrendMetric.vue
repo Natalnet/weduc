@@ -75,7 +75,6 @@ export default {
     },
 
     mounted() {
-        console.log(this.chartData);
         this.chartist = new Chartist.Line(this.$refs.chart, this.chartData, {
             lineSmooth: Chartist.Interpolation.none(),
             fullWidth: true,

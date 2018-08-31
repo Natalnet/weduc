@@ -20,7 +20,11 @@
 
                         <div class="mb-3">
                             <div class="input-group">
-                                <span class="input-group-addon"><i class="fa fa-envelope-o"></i></span>
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">
+                                        <i class="fa fa-envelope-o"></i>
+                                    </span>
+                                </div>
                                 <input type="text" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" placeholder="E-mail">
                             </div>
                             @if ($errors->has('email'))

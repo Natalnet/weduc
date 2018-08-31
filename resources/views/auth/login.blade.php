@@ -12,8 +12,11 @@
                                 {{ csrf_field() }}
                                 <div class="mb-3">
                                     <div class="input-group">
-                                        <span class="input-group-addon"><i class="icon-user"></i>
-                                        </span>
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">
+                                                <i class="icon-user"></i>
+                                            </span>
+                                        </div>
                                         <input id="email" type="email" name="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" placeholder="E-mail" value="{{ old('email') }}">
                                     </div>
 
@@ -25,8 +28,11 @@
                                 </div>
                                 <div class="mb-4">
                                     <div class="input-group">
-                                        <span class="input-group-addon"><i class="icon-lock"></i>
-                                        </span>
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">
+                                                <i class="icon-lock"></i>
+                                            </span>
+                                        </div>
                                         <input id="password" type="password" name="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" placeholder="Password">
                                     </div>
                                     @if ($errors->has('password'))
