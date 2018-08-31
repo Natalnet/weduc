@@ -1,8 +1,8 @@
 <template>
-    <card class="relative">
+    <card class="loading-card">
         <div
             v-if="loading"
-            class="rounded-lg d-flex items-center justify-center absolute pin z-50"
+            class="loading"
             :class="modeClass"
         >
             <loader class="text-60" />
