@@ -25,3 +25,6 @@ Route::get('/programs/user/current', 'API\ProgramController@indexForCurrentUser'
 Route::get('/programs/user/{user}', 'API\ProgramController@indexForUser');
 Route::put('/programs/{program}', 'API\ProgramController@update');
 Route::get('/programs/{program}/compile', 'API\ProgramController@compile');
+
+Route::get('/metrics/compilation-errors', 'API\MetricsController@compilationErrors');
+Route::get('/metrics/compilations-per-day', 'API\MetricsController@compilationsPerDay');
