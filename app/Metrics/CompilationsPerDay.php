@@ -48,6 +48,39 @@ class CompilationsPerDay extends Trend
     }
 
     /**
+     * Format the possible aggregate result date into a proper string.
+     *
+     * @param  \Cake\Chronos\Chronos  $date
+     * @param  string  $unit
+     * @param  bool  $twelveHourTime
+     * @return string
+     */
+    protected function formatPossibleAggregateResultDate(Chronos $date, $unit, $twelveHourTime)
+    {
+        switch ($unit) {
+            case 'month':
+                return __($date->format('F')).' '.$date->format('Y');
+
+            case 'week':
+                return __($date->startOfWeek()->format('F')).' '.$date->startOfWeek()->format('j').' - '.
+                    __($date->endOfWeek()->format('F')).' '.$date->endOfWeek()->format('j');
+
+            case 'day':
+                return $date->format('j').' de '.__($date->format('F')).', '.$date->format('Y');
+
+            case 'hour':
+                return $twelveHourTime
+                    ? $date->format('j').' de '.__($date->format('F')).' - '.$date->format('g:00 A')
+                    : $date->format('j').' de '.__($date->format('F')).' - '.$date->format('G:00');
+
+            case 'minute':
+                return $twelveHourTime
+                    ? $date->format('j').' de '.__($date->format('F')).' - '.$date->format('g:i A')
+                    : $date->format('j').' de '.__($date->format('F')).' - '.$date->format('G:i');
+        }
+    }
+
+    /**
      * Calculate the value of the metric.
      *
      * @param  \Illuminate\Http\Request  $request
