@@ -17045,3 +17045,63 @@ body {
   z-index: 40;
 }
 
+.metric-card .partition-chart .ct-series-a .ct-area,
+.metric-card .partition-chart .ct-series-a .ct-slice-donut-solid,
+.metric-card .partition-chart .ct-series-a .ct-slice-pie {
+  fill: #f5573b !important;
+}
+
+.metric-card .partition-chart .ct-series-b .ct-area,
+.metric-card .partition-chart .ct-series-b .ct-slice-donut-solid,
+.metric-card .partition-chart .ct-series-b .ct-slice-pie {
+  fill: #f99037 !important;
+}
+
+.metric-card .partition-chart .ct-series-c .ct-area,
+.metric-card .partition-chart .ct-series-c .ct-slice-donut-solid,
+.metric-card .partition-chart .ct-series-c .ct-slice-pie {
+  fill: #f2cb22 !important;
+}
+
+.metric-card .partition-chart .ct-series-d .ct-area,
+.metric-card .partition-chart .ct-series-d .ct-slice-donut-solid,
+.metric-card .partition-chart .ct-series-d .ct-slice-pie {
+  fill: #8fc15d !important;
+}
+
+.metric-card .partition-chart .ct-series-e .ct-area,
+.metric-card .partition-chart .ct-series-e .ct-slice-donut-solid,
+.metric-card .partition-chart .ct-series-e .ct-slice-pie {
+  fill: #098f56 !important;
+}
+
+.metric-card .partition-chart .ct-series-f .ct-area,
+.metric-card .partition-chart .ct-series-f .ct-slice-donut-solid,
+.metric-card .partition-chart .ct-series-f .ct-slice-pie {
+  fill: #47c1bf !important;
+}
+
+.metric-card .partition-chart .ct-series-g .ct-area,
+.metric-card .partition-chart .ct-series-g .ct-slice-donut-solid,
+.metric-card .partition-chart .ct-series-g .ct-slice-pie {
+  fill: #1693eb !important;
+}
+
+.metric-card .partition-chart .ct-series-h .ct-area,
+.metric-card .partition-chart .ct-series-h .ct-slice-donut-solid,
+.metric-card .partition-chart .ct-series-h .ct-slice-pie {
+  fill: #6474d7 !important;
+}
+
+.metric-card .partition-chart .ct-series-i .ct-area,
+.metric-card .partition-chart .ct-series-i .ct-slice-donut-solid,
+.metric-card .partition-chart .ct-series-i .ct-slice-pie {
+  fill: #9c6ade !important;
+}
+
+.metric-card .partition-chart .ct-series-j .ct-area,
+.metric-card .partition-chart .ct-series-j .ct-slice-donut-solid,
+.metric-card .partition-chart .ct-series-j .ct-slice-pie {
+  fill: #e471de !important;
+}
+

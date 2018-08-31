@@ -66,7 +66,7 @@ class CompilationsPerDay extends Trend
                     __($date->endOfWeek()->format('F')).' '.$date->endOfWeek()->format('j');
 
             case 'day':
-                return $date->format('j').' de '.__($date->format('F')).', '.$date->format('Y');
+                return $date->format('j').' de '.__($date->format('F')).' de '.$date->format('Y');
 
             case 'hour':
                 return $twelveHourTime
