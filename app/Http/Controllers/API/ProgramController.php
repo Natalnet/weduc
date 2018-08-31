@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\API;
 
+use App\Events\ProgramCompiled;
 use App\Program;
 use App\ProgrammingLanguage;
 use App\User;
@@ -146,6 +147,8 @@ class ProgramController extends Controller
 
             $program->custom_code = $language->header . $trans->getTranslation() . $language->footer;
             $program->save();
+
+            event(new ProgramCompiled($program));
         } catch (\Exception $e) {
             if ($e instanceof InvalidCharacterException) {
                 $line = $e->codeLine;
@@ -163,6 +166,9 @@ class ProgramController extends Controller
                 $line = 0;
                 $message = $e->getMessage();
             }
+
+            event(new ProgramCompiled($program, $e));
+
             return response()->json([
                 'message' => 'The compilation failed.',
                 'errors' => [
