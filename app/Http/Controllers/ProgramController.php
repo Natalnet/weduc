@@ -14,6 +14,16 @@ use Natalnet\Relex\Types;
 
 class ProgramController extends Controller
 {
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function program()
     {
         // return ProgrammingLanguage::pluck('name', 'id')->toJson();
