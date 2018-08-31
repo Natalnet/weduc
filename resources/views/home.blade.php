@@ -2,6 +2,16 @@
 
 @section('content')
 <div class="container-fluid animated fadeIn">
+    @role('admin')
+    <div class="row">
+        <div class="col-md-4">
+            <compilations-per-day></compilations-per-day>
+        </div>
+        <div class="col-md-8">
+            <compilation-errors></compilation-errors>
+        </div>
+    </div>
+    @endrole
     <div class="row">
         <div class="col-md-12">
             <div class="card card-accent-primary">
@@ -23,12 +33,6 @@
                     <a href="{{ route('program') }}" class="btn btn-primary">Comece a programar aqui!</a>
                 </div>
             </div>
-            <div class="card card-accent-primary">
-                <div class="card-body">
-                </div>
-            </div>
-
-            <loading-card></loading-card>
         </div>
     </div>
 </div>

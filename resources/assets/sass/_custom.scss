@@ -13,3 +13,160 @@
     vertical-align: middle;
   }
 }
+
+.loading-card {
+  position: relative;
+
+  .loading {
+    position: absolute;
+    display: flex;
+    background-color: white;
+    border-radius: .5rem;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    z-index: 50;
+
+    .dots {
+      display: block;
+      color: $gray-600;
+      margin-left: auto;
+      margin-right: auto;
+    }
+  }
+}
+
+.metric-card {
+  position: relative;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  height: 150px;
+
+  .card-body {
+    padding: 0;
+  }
+
+  .trend-header {
+    margin-bottom: 1rem;
+    display: flex;
+
+    .trend-title {
+      font-size: 1rem;
+      color: $gray-800;
+      margin: 0;
+      margin-right: .75rem;
+      font-weight: 800;
+    }
+
+    .trend-select {
+      font-size: .75rem;
+      min-width: 6rem;
+      margin-left: auto;
+      height: 1.5rem;
+      background-color: $gray-300;
+    }
+  }
+
+  .trend-chart {
+    position: absolute;
+    border-bottom-left-radius: .5rem;
+    border-bottom-right-radius: .5rem;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    z-index: 40;
+
+    .chartist-tooltip {
+      min-width: 14em!important;
+      padding: .2em!important;
+      background: $white!important;
+      color: $primary!important;
+      border-radius: .25rem!important;
+      border-width: 1px!important;
+      border-color: $gray-600!important;
+      -webkit-box-shadow: 0 2px 4px 0 rgba(0,0,0,.05)!important;
+      box-shadow: 0 2px 4px 0 rgba(0,0,0,.05)!important;
+      font-family: Nunito,system-ui,BlinkMacSystemFont,-apple-system,sans-serif!important;
+
+      &:before {
+        display: none;
+        border-top-color: $white!important
+      }
+    }
+
+    .ct-series-a .ct-bar,.ct-series-a .ct-line,.ct-series-a .ct-point {
+      stroke: $primary!important;
+      stroke-width: 2px
+    }
+
+    .ct-series-a .ct-area,.ct-series-a .ct-slice-pie {
+      fill: $primary!important
+    }
+
+    .ct-point {
+      stroke: $primary!important;
+      stroke-width: 6px!important
+    }
+  }
+
+  .partition-header {
+    display: flex;
+    margin-bottom: .75rem;
+    color: $gray-800;
+    font-size: 1rem;
+    font-weight: 800;
+
+    .partition-span {
+      margin-left: auto;
+      color: $gray-700;
+      font-size: .875rem;
+      font-weight: 600;
+    }
+  }
+
+  .partition-data {
+    max-height: 5.625rem;
+    overflow: hidden;
+    overflow-y: auto;
+
+    .partition-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+
+      .partition-item {
+        color: $gray-800;
+        font-size: .75rem;
+        line-height: 1.5;
+
+        span {
+          border-radius: 9999px;
+          display: inline-block;
+          width: .5rem;
+          height: .5rem;
+          margin-right: .5rem;
+        }
+      }
+    }
+  }
+
+  .partition-chart {
+    position: absolute;
+    top: 50%;
+    -webkit-transform: perspective(1px) translateY(-50%);
+    transform: perspective(1px) translateY(-50%);
+    border-bottom-left-radius: .5rem;
+    border-bottom-right-radius: .5rem;
+    z-index: 40;
+  }
+}
