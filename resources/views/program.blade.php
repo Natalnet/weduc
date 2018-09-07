@@ -107,7 +107,7 @@
                                         <i class="fa fa-folder-open-o" aria-hidden="true"></i>
                                     </a>
                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                        <a v-for="item of language.programs" class="dropdown-item" href="#" @click="loadProgram(item)">@{{ item.name }}</a>
+                                        <a v-for="item of programs" class="dropdown-item" href="#" @click="loadProgram(item)">@{{ item.name }}</a>
                                     </div>
                                 </div>
                             </span>

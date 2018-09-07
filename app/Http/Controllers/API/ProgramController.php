@@ -31,6 +31,11 @@ class ProgramController extends Controller
         return auth()->user()->programs;
     }
 
+    public function indexForCurrentUserAndLanguage(ProgrammingLanguage $language)
+    {
+        return auth()->user()->programs()->ofLanguage($language)->get();
+    }
+
     public function indexForUser(User $user)
     {
         return $user->programs;
@@ -52,7 +57,7 @@ class ProgramController extends Controller
 
         $language = ProgrammingLanguage::findOrFail($request->target_language);
         $program = new Program();
-        $program->user_id = 1; //auth()->user()->id;
+        $program->user_id = auth()->user()->id;
         $program->name = $request->name;
         $program->reduc_code = $request->reduc_code;
         $program->custom_code = $request->custom_code;

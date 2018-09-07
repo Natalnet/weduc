@@ -3,8 +3,10 @@ Vue.component('ide', {
 
     data() {
         return {
+            user: null,
             errors: '',
             language: '',
+            programs: [],
             program: {
                 id: "",
                 name: "NovoPrograma",
@@ -75,8 +77,17 @@ Vue.component('ide', {
             axios.get('/fetchlanguage/'+value)
             .then(response => {
                 this.language = response.data
+                this.fetchPrograms()
             })
             .catch(error => console.log(error))
+        },
+
+        fetchPrograms() {
+            axios.get('api/programs/user/current/language/' + this.language.id)
+                .then(response => {
+                    this.programs = response.data
+                })
+                .catch(error => console.log(error))
         },
 
         setupBlockly() {
@@ -122,6 +133,8 @@ Vue.component('ide', {
             })
             .then(response => {
                 this.$emit('program-created');
+                this.fetchPrograms()
+                this.loadProgram(response.data)
                 this.$notify({
                     group: 'ide',
                     type: 'success',

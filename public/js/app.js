@@ -62691,8 +62691,10 @@ Vue.component('ide', {
 
     data: function data() {
         return {
+            user: null,
             errors: '',
             language: '',
+            programs: [],
             program: {
                 id: "",
                 name: "NovoPrograma",
@@ -62760,6 +62762,16 @@ Vue.component('ide', {
 
             axios.get('/fetchlanguage/' + value).then(function (response) {
                 _this2.language = response.data;
+                _this2.fetchPrograms();
+            }).catch(function (error) {
+                return console.log(error);
+            });
+        },
+        fetchPrograms: function fetchPrograms() {
+            var _this3 = this;
+
+            axios.get('api/programs/user/current/language/' + this.language.id).then(function (response) {
+                _this3.programs = response.data;
             }).catch(function (error) {
                 return console.log(error);
             });
@@ -62797,7 +62809,7 @@ Vue.component('ide', {
             }
         },
         create: function create() {
-            var _this3 = this;
+            var _this4 = this;
 
             axios.post('/api/programs', {
                 target_language: this.language.id,
@@ -62805,8 +62817,10 @@ Vue.component('ide', {
                 reduc_code: this.program.code,
                 custom_code: this.program.customCode
             }).then(function (response) {
-                _this3.$emit('program-created');
-                _this3.$notify({
+                _this4.$emit('program-created');
+                _this4.fetchPrograms();
+                _this4.loadProgram(response.data);
+                _this4.$notify({
                     group: 'ide',
                     type: 'success',
                     title: 'Programa salvo com sucesso!',
@@ -62814,7 +62828,7 @@ Vue.component('ide', {
                 });
             }).catch(function (error) {
                 var message = error.response.data.errors && error.response.data.errors.name ? error.response.data.errors.name[0] : 'Ocorreu um erro inesperado ao salvar o programa.';
-                _this3.$notify({
+                _this4.$notify({
                     group: 'ide',
                     type: 'error',
                     title: 'Erro ao salvar programa!',
@@ -62823,21 +62837,21 @@ Vue.component('ide', {
             });
         },
         update: function update() {
-            var _this4 = this;
+            var _this5 = this;
 
             axios.put('/api/programs/' + this.program.id, {
                 name: this.program.name,
                 reduc_code: this.program.code
             }).then(function (response) {
-                _this4.$emit('program-created');
-                _this4.$notify({
+                _this5.$emit('program-created');
+                _this5.$notify({
                     group: 'ide',
                     type: 'success',
                     title: 'Programa salvo com sucesso!',
                     text: 'O seu programa foi salvo com sucesso!'
                 });
             }).catch(function (error) {
-                _this4.$notify({
+                _this5.$notify({
                     group: 'ide',
                     type: 'error',
                     title: 'Erro ao salvar programa!',
@@ -62846,7 +62860,7 @@ Vue.component('ide', {
             });
         },
         compile: function compile() {
-            var _this5 = this;
+            var _this6 = this;
 
             this.update();
 
@@ -62855,9 +62869,9 @@ Vue.component('ide', {
                 language: this.language.id
             }).then(function (response) {
                 if (response.data.success) {
-                    _this5.errors = '';
-                    _this5.program.customCode = response.data.target_code;
-                    _this5.$notify({
+                    _this6.errors = '';
+                    _this6.program.customCode = response.data.target_code;
+                    _this6.$notify({
                         group: 'ide',
                         type: 'success',
                         title: 'Programa compilado com sucesso!',
@@ -62865,28 +62879,28 @@ Vue.component('ide', {
                     });
                 } else {
                     console.log(response.data);
-                    _this5.errors = response.data.errors.reduc_code.message;
+                    _this6.errors = response.data.errors.reduc_code.message;
                 }
             }).catch(function (error) {
                 console.log(error.response.data);
-                _this5.errors = "Linha " + error.response.data.errors.reduc_code.line + ": " + error.response.data.errors.reduc_code.message;
+                _this6.errors = "Linha " + error.response.data.errors.reduc_code.line + ": " + error.response.data.errors.reduc_code.message;
             });
         },
         compileTarget: function compileTarget() {
-            var _this6 = this;
+            var _this7 = this;
 
             if (this.program.id) {
                 axios.post('/program/' + this.program.id + '/compile_target').then(function (response) {
                     console.log(response);
-                    _this6.errors = '';
-                    _this6.$notify({
+                    _this7.errors = '';
+                    _this7.$notify({
                         group: 'ide',
                         type: 'success',
                         title: 'Programa compilado com sucesso!',
                         text: 'O seu programa foi compilado com sucesso na linguagem alvo!'
                     });
                 }).catch(function (error) {
-                    _this6.errors = error.response.data.message;
+                    _this7.errors = error.response.data.message;
                 });
             } else {
                 this.$notify({
