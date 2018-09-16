@@ -62812,10 +62812,10 @@ Vue.component('ide', {
             var _this4 = this;
 
             axios.post('/api/programs', {
-                target_language: this.language.id,
+                target_language_id: this.language.id,
                 name: this.program.name,
                 reduc_code: this.program.code,
-                custom_code: this.program.customCode
+                target_code: this.program.customCode
             }).then(function (response) {
                 _this4.$emit('program-created');
                 _this4.fetchPrograms();

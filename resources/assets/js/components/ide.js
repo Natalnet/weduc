@@ -126,10 +126,10 @@ Vue.component('ide', {
 
         create() {
             axios.post('/api/programs', {
-                target_language: this.language.id,
+                target_language_id: this.language.id,
                 name: this.program.name,
                 reduc_code: this.program.code,
-                custom_code: this.program.customCode
+                target_code: this.program.customCode
             })
             .then(response => {
                 this.$emit('program-created');

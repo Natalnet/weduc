@@ -44,15 +44,15 @@ class ProgramController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'target_language' => 'required|exists:programming_languages,id',
+            'target_language_id' => 'required|exists:programming_languages,id',
             'name' => [
                 'required',
                 Rule::unique('programs')->where(function ($query) {
                     return $query->where('user_id', auth()->id());
                 })
             ],
-            'reduc_code' => 'required_without:custom_code|required_if:custom_code,null',
-            'custom_code' => 'required_if:reduc_code,null',
+            'reduc_code' => 'required_without:target_code|required_if:target_code,null',
+            'target_code' => 'required_if:reduc_code,null',
         ]);
 
         $language = ProgrammingLanguage::findOrFail($request->target_language);
@@ -60,7 +60,7 @@ class ProgramController extends Controller
         $program->user_id = auth()->user()->id;
         $program->name = $request->name;
         $program->reduc_code = $request->reduc_code;
-        $program->custom_code = $request->custom_code;
+        $program->custom_code = $request->target_code;
 
         return $language->programs()->save($program);
     }
@@ -69,13 +69,13 @@ class ProgramController extends Controller
     {
         $request->validate([
             'name' => 'required',
-            'reduc_code' => 'required_without:custom_code|required_if:custom_code,null',
-            'custom_code' => 'required_if:reduc_code,null',
+            'reduc_code' => 'required_without:target_code|required_if:target_code,null',
+            'target_code' => 'required_if:reduc_code,null',
         ]);
 
         $program->name = $request->name;
         $program->reduc_code = $request->reduc_code;
-        $program->custom_code = $request->custom_code;
+        $program->custom_code = $request->target_code;
         $program->save();
 
         return response(null, 204);
