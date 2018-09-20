@@ -55,7 +55,7 @@ class ProgramController extends Controller
             'target_code' => 'required_if:reduc_code,null',
         ]);
 
-        $language = ProgrammingLanguage::findOrFail($request->target_language);
+        $language = ProgrammingLanguage::findOrFail($request->target_language_id);
         $program = new Program();
         $program->user_id = auth()->user()->id;
         $program->name = $request->name;
