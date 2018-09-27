@@ -17,7 +17,7 @@
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-body">
-                            <h4>Edição do Cadastro de Linguagem</h4>
+                            <h4>Submeter Linguagem para Cadastro</h4>
                             <hr>
                             <p class="text-muted">
                                 Para cadastrar uma linguagem você deverá preencher todos os campos seguindo os exemplos aprensentados. Observe que existem algumas palavras específicas que são utilizadas para identificar e tratar os dados fornecidos, como por exemplo: <b>comandos, comandos1, comandos2, principal, nomedoprograma, funcao, variavel, valor</b>.

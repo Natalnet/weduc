@@ -16,9 +16,10 @@
                     <i class="nav-icon fa fa-group"></i> Turmas
                 </a>
             </li>
-            @role('admin')
+
+            @role('coach')
                 <li class="nav-title">
-                    Administrador
+                    Tutor
                 </li>
                 <li class="nav-item nav-dropdown">
                     <a class="nav-link nav-dropdown-toggle" href="#">
@@ -47,22 +48,22 @@
                     </ul>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ url('/log-viewer') }}">
-                        <i class="nav-icon fa fa-archive"></i> Logs
-                    </a>
-                </li>
-                <li class="divider"></li>
-            @endrole
-
-            @role('coach')
-                <li class="nav-title">
-                    Tutor
-                </li>
-                <li class="nav-item">
                     <a class="nav-link" href="{{ route('coaching') }}">
                         <i class="nav-icon fa fa-group"></i> Turmas
                     </a>
                 </li>
+            @endrole
+
+            @role('admin')
+            <li class="nav-title">
+                Administrador
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ url('/log-viewer') }}">
+                    <i class="nav-icon fa fa-archive"></i> Logs
+                </a>
+            </li>
+            <li class="divider"></li>
             @endrole
             <li class="nav-item mt-auto">
                 <a class="nav-link bg-teal" href="http://github.com" target="_top">
