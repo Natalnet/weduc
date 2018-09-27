@@ -19,7 +19,7 @@
                             <tbody>
                                 @foreach($languages as $language)
                                 <tr>
-                                    <td>{ $language->name }}</td>
+                                    <td>{{ $language->name }}</td>
                                     <td>
                                         @if($language->user_id == auth()->id())
                                         <a href="{{  route('languages.edit', ['language' => $language->id]) }}" class="btn btn-outline-primary btn-sm">
