@@ -21,6 +21,7 @@
                                 <tr>
                                     <td><a href="/programar/{{ $language->id }}">{{ $language->name }}</a></td>
                                     <td>
+                                        @if($language->user_id == auth()->id())
                                         <a href="{{  route('languages.edit', ['language' => $language->id]) }}" class="btn btn-outline-primary btn-sm">
                                             Editar linguagem
                                         </a>
@@ -33,6 +34,7 @@
                                         <a href="/weduc/linguagem/excluir/{{ $language->id }}" class="btn btn-outline-primary btn-sm">
                                             Excluir linguagem
                                         </a>
+                                        @endif
                                     </td>
 
                                 </tr>
