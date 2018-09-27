@@ -38,4 +38,14 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Program');
     }
+
+    public function coachingClassrooms()
+    {
+        return $this->hasMany('App\Classroom', 'coach_id');
+    }
+
+    public function classrooms()
+    {
+        return $this->belongsToMany('App\Classroom', 'classroom_student', 'student_id', 'classroom_id');
+    }
 }

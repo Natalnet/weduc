@@ -11,6 +11,11 @@
                     <i class="nav-icon fa fa-code"></i> Programar
                 </a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('classrooms') }}">
+                    <i class="nav-icon fa fa-group"></i> Turmas
+                </a>
+            </li>
             @role('admin')
                 <li class="nav-title">
                     Administrador
@@ -47,6 +52,17 @@
                     </a>
                 </li>
                 <li class="divider"></li>
+            @endrole
+
+            @role('coach')
+                <li class="nav-title">
+                    Tutor
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('coaching') }}">
+                        <i class="nav-icon fa fa-group"></i> Turmas
+                    </a>
+                </li>
             @endrole
             <li class="nav-item mt-auto">
                 <a class="nav-link bg-teal" href="http://github.com" target="_top">
