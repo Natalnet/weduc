@@ -8,6 +8,8 @@ import LoadingCard from '@/components/LoadingCard'
 import PartitionMetric from '@/components/Metrics/PartitionMetric'
 import TrendMetric from '@/components/Metrics/TrendMetric'
 
+import UsersIndex from '@/views/UsersIndex'
+
 Vue.component('card', Card)
 Vue.component('compilation-errors', CompilationErrors)
 Vue.component('compilations-per-day', CompilationsPerDay)
@@ -15,3 +17,4 @@ Vue.component('loader', Loader)
 Vue.component('loading-card', LoadingCard)
 Vue.component('partition-metric', PartitionMetric)
 Vue.component('trend-metric', TrendMetric)
+Vue.component('users-index', UsersIndex)
