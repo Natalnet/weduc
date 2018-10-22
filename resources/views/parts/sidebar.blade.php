@@ -66,7 +66,7 @@
             <li class="divider"></li>
             @endrole
             <li class="nav-item mt-auto">
-                <a class="nav-link bg-teal" href="http://github.com" target="_top">
+                <a class="nav-link bg-teal" href="https://github.com/Natalnet/relex/wiki/Tutorial-da-Linguagem-R-Educ" target="_blank">
                     <i class="nav-icon fa fa-leanpub"></i> Veja nossos tutoriais
                 </a>
             </li>
