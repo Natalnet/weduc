@@ -72,7 +72,9 @@
     </div>
 
     <!-- Bootstrap and necessary plugins -->
-    <script src="{{ asset('js/app.js') }}"></script>
+    <script src="{{ mix('js/manifest.js') }}"></script>
+    <script src="{{ mix('js/vendor.js') }}"></script>
+    <script src="{{ mix('js/app.js') }}"></script>
     <script src="/js/sweetalert2.min.js"></script>
 
     @stack('bottom-scripts')

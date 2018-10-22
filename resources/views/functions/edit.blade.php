@@ -110,14 +110,7 @@
 
                         <div class="form-group">
                             <label for="code">Código</label>
-                            <textarea
-                                type="text"
-                                class="form-control{{ $errors->has('code') ? ' is-invalid' : '' }}"
-                                name="code"
-                                id="code"
-                                placeholder="Descrição"
-                                rows="6"
-                            >{{ old('code') ?: $function->code }}</textarea>
+                            <code-field name="code" value="{{ old('code') ?: $function->code }}"></code-field>
 
                             @if ($errors->has('code'))
                                 <div class="invalid-feedback" style="display: block;">

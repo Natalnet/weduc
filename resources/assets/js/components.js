@@ -14,6 +14,8 @@ import CoachingClassrooms from '@/views/CoachingClassrooms'
 import CreateClassroom from '@/views/CreateClassroom'
 import JoinClassroom from '@/views/JoinClassroom'
 
+import CodeField from '@/components/CodeField'
+
 Vue.component('card', Card)
 Vue.component('compilation-errors', CompilationErrors)
 Vue.component('compilations-per-day', CompilationsPerDay)
@@ -26,3 +28,4 @@ Vue.component('classrooms-index', ClassroomsIndex)
 Vue.component('coaching-classrooms', CoachingClassrooms)
 Vue.component('create-classroom', CreateClassroom)
 Vue.component('join-classroom', JoinClassroom)
+Vue.component('code-field', CodeField)
