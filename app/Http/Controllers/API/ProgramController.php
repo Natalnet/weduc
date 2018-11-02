@@ -195,20 +195,20 @@ class ProgramController extends Controller
     {
         $parameters = [];
         preg_match_all('/var[1-9]+\(([a-zA-Z]+)\)/', $functionCode, $matches);
-        foreach ($matches[1] as $parameterType) {
+        foreach (array_combine($matches[0], $matches[1]) as $parameter => $parameterType) {
             switch ($parameterType) {
                 case 'int':
-                    $parameters[] = Types::NUMBER_TYPE;
+                    $parameters[$parameter] = Types::NUMBER_TYPE;
                     break;
                 case 'String':
-                    $parameters[] = Types::STRING_TYPE;
+                    $parameters[$parameter] = Types::STRING_TYPE;
                     break;
                 case 'boolean':
-                    $parameters[] = Types::BOOLEAN_TYPE;
+                    $parameters[$parameter] = Types::BOOLEAN_TYPE;
                     break;
             }
         }
 
-        return $parameters;
+        return array_values($parameters);
     }
 }
