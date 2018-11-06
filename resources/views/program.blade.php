@@ -85,7 +85,7 @@
                                 <button v-if="programExists && mode === 'reduc'" class="btn btn-outline-warning" @click="compile">
                                     <i class="fa fa-code" aria-hidden="true"></i> Compilar
                                 </button>
-                                <button v-if="programExists && mode === 'target' && targetCanCompile" class="btn btn-outline-warning" @click="compile">
+                                <button v-if="programExists && mode === 'target' && targetCanCompile" class="btn btn-outline-warning" @click="compileTarget">
                                     <i class="fa fa-code" aria-hidden="true"></i> Compilar Alvo
                                 </button>
                                 <a v-if="programExists && targetCanSend" :href="downloadUrl" class="btn btn-outline-success" target="_blank" v-if="disableNameInput == true">
