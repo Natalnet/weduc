@@ -21,7 +21,7 @@ class ProgramController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('auth')->except(['downloadSendZip', 'downloadProgram', 'downloadJssc']);
     }
 
     public function program()
@@ -183,7 +183,7 @@ class ProgramController extends Controller
         shell_exec("mkdir -p ".$dest);
 
         //Copia os arquivos de include e extrai na pasta
-//        shell_exec("unzip ".$origin." -d ".$dest);
+        //shell_exec("unzip ".$origin." -d ".$dest);
 
         // Coloca o código do programa na pasta temporária
         Storage::disk('program_files')->put($program->id.'/compilation/'.$programName.'/'.$programName.'.'.$language->extension, $code);
@@ -195,7 +195,7 @@ class ProgramController extends Controller
         $comando = str_replace("localdocompilador", $compiler_path, $comando);
         $comando = str_replace("nomedoprograma", $programName, $comando);
 
-        dd($comando);
+        //dd($comando);
 
         Storage::disk('program_files')->put($program->id.'/compilation/'.$programName.'/'.'weduc.sh', $comando);
 
@@ -203,7 +203,11 @@ class ProgramController extends Controller
         $makeCommand = "/bin/bash ".$dest."/weduc.sh";
 
         // Iniciei a compilacao na linguagem
-        return shell_exec($makeCommand);
+        exec($makeCommand, $output, $returnVar);
+
+        abort_unless($returnVar == 0, 400, implode("\n", $output));
+
+        return response(null, 204);
     }
 
     public function downloadSendZip(ProgrammingLanguage $language)
