@@ -85,7 +85,7 @@ public class WeducClient {
                 String jsscFileURL = "$JSSC_DOWNLOAD_URL";
                 String jsscSaveDir = "../../";
                 try {
-                    HttpDownloadUtility.downloadFile(fileURL, saveDir);
+                    HttpDownloadUtility.downloadFile(jsscFileURL, jsscSaveDir);
                 } catch (IOException ex) {
                     ex.printStackTrace();
                 }
