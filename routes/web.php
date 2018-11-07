@@ -18,6 +18,9 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/obrsimulada', function () {
+    return view('obrsimulada');
+})->name('obrsimulada');
 
 Route::get('/programar', 'ProgramController@program')->name('program');
 Route::post('/compilar', 'ProgramController@compile')->name('compile');
