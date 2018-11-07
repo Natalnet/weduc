@@ -136,19 +136,27 @@
         <div class="alt-downloads">
             <div class="download">
                 <div class="logo windows"></div>
-                <button class="link-button dlink" data-os="win" aria-label="Windows download" role="link">
+                <button class="link-button dlink" data-os="win" aria-label="Windows download" role="link" onclick="downloadWindows()">
                     <img class="download-icon" src="{{ asset('/images/download.svg') }}" width="18px" height="18px" alt="Download VS Code"> Windows
                     <small>Windows 7, 8, 10</small>
                 </button>
             </div>
             <div class="download">
                 <div class="logo mac"></div>
-                <button class="link-button dlink" data-os="osx" aria-label="Mac download" role="link">
+                <button class="link-button dlink" data-os="osx" aria-label="Mac download" role="link" onclick="downloadMac()">
                     <img class="download-icon" src="{{ asset('/images/download.svg') }}" width="18px" height="18px" alt="Download VS Code"> Mac
                     <small>macOS 10.9+</small></button>
             </div>
         </div>
     </div>
 </div>
+<script>
+    function downloadWindows() {
+        window.open('http://bit.ly/obr_simulada_windows', '_blank');
+    }
+    function downloadMac() {
+        window.open('http://bit.ly/obr_simulada_OSX', '_blank');
+    }
+</script>
 </body>
 </html>
