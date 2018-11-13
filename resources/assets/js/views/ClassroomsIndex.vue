@@ -2,11 +2,9 @@
     <loading-card :loading="loading">
         <template slot="header">
             <div class="card-header">
-                <i class="fa fa-users"></i> Minhas Turmas
+                <i class="fa fa-users"></i>Turmas
             </div>
         </template>
-
-        <join-classroom @joined-classroom="reload"></join-classroom>
 
         <table class="table">
             <thead>
@@ -42,7 +40,7 @@
 
         computed: {
             fetchEndpoint() {
-                return '/api/' + this.resourceName + '/studying'
+                return '/api/' + this.resourceName
             },
         },
 

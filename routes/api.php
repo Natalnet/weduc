@@ -32,6 +32,7 @@ Route::get('/programs/{program}/compile', 'API\ProgramController@compile');
 Route::get('/metrics/compilation-errors', 'API\MetricsController@compilationErrors');
 Route::get('/metrics/compilations-per-day', 'API\MetricsController@compilationsPerDay');
 
+Route::get('/classrooms', 'API\ClassroomController@index');
 Route::post('/classrooms', 'API\ClassroomController@store');
 Route::post('/classrooms/join', 'API\ClassroomController@join');
 Route::get('/classrooms/coaching', 'API\ClassroomController@coaching');

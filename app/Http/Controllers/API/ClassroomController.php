@@ -13,6 +13,15 @@ class ClassroomController extends Controller
         $this->middleware('auth:api');
     }
 
+    public function index()
+    {
+        return response()->json([
+            'data' => [
+                'classrooms' => Classroom::with('coach')->get()
+            ]
+        ]);
+    }
+
     public function coaching()
     {
         $classrooms = auth()->user()->coachingClassrooms()->withCount('students')->get();

@@ -46,5 +46,6 @@ Route::get('/program/{program}/download/jssc', 'ProgramController@downloadJssc')
 
 Route::get('/download/envio/linguagem/{language}', 'ProgramController@downloadSendZip');
 
-Route::get('/classrooms', 'ClassroomController@index')->name('classrooms');
+Route::get('/classrooms', 'ClassroomController@index')->name('classrooms.index');
+Route::get('/classrooms/enrolled', 'ClassroomController@index')->name('classrooms');
 Route::get('/coaching', 'ClassroomController@coaching')->name('coaching');
