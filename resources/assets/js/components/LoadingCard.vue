@@ -7,6 +7,9 @@
         >
             <loader class="text-60" />
         </div>
+        <template slot="header">
+            <slot name="header"></slot>
+        </template>
 
         <slot />
     </card>

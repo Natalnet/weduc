@@ -7,15 +7,21 @@
 
 require('./bootstrap');
 
-
-
 window.Vue = require('vue');
+
+import Atom from './Atom'
+
+/**
+ * Next, we will create a fresh Vue application instance and attach it to
+ * the page. Then, you may begin adding components to this application
+ * or customize the JavaScript scaffolding to fit your unique needs.
+ */
+import './components'
 
 /**
  * Sweetalert2 for Vue
  */
 import VueSweetalert2 from 'vue-sweetalert2';
-
 Vue.use(VueSweetalert2);
 
 /**
@@ -23,13 +29,6 @@ Vue.use(VueSweetalert2);
  */
 import Notifications from 'vue-notification';
 Vue.use(Notifications);
-
-/**
- * Next, we'll setup some Vue components that need to be global so
- * that they are always available. Then, we will be ready to create
- * the actual Vue instance and start up this JavaScript application.
- */
-import './components'
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -41,9 +40,16 @@ Vue.component('reduc-functions', require('./components/ReducFunctions'));
 require('./components/ide');
 require('./components/editor');
 
-const app = new Vue({
-    el: '#app'
-});
+/**
+ * Finally, we'll create this Vue Router instance and register all of the
+ * Atom routes. Once that is complete, we will create the Vue instance
+ * and hand this router to the Vue instance. Then Atom is all ready!
+ */
+;(function() {
+    this.CreateAtom = function(config) {
+        return new Atom(config)
+    }
+}.call(window))
 
 /**
  * Core UI

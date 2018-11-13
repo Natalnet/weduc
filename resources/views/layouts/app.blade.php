@@ -61,7 +61,7 @@
 
             <!-- Main content -->
             <main class="main" style="min-height: 84vh;">
-
+                <loading ref="loading"></loading>
                 @yield('content')
             </main>
 
@@ -78,6 +78,16 @@
     <script src="/js/sweetalert2.min.js"></script>
 
     @stack('bottom-scripts')
+
+    <!-- Build Atom Instance -->
+    <script>
+        window.Atom = new CreateAtom({})
+    </script>
+
+    <!-- Start Atom -->
+    <script>
+        Atom.liftOff()
+    </script>
 </body>
 
 </html>
