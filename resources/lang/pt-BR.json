@@ -10,5 +10,21 @@
     "September": "Setembro",
     "October": "Outubro",
     "November": "Novembro",
-    "December": "Dezembro"
+    "December": "Dezembro",
+    "Whoops!": "Oops!",
+    "Hello!": "Olá!",
+    "Regards": "Atenciosamente",
+    "If you’re having trouble clicking the \":actionText\" button, copy and paste the URL below\ninto your web browser: [:actionURL](:actionURL)": "Se você tiver problemas ao clicar no botão \":actionText\", copie e cole a URL abaixo\nno seu navegador: [:actionURL](:actionURL)",
+    "Reset Password Notification": "Notificação de Redefinição de Senha",
+    "You are receiving this email because we received a password reset request for your account.": "Você está recebendo este email porque recebemos uma solicitação de redefinição de senha para sua conta.",
+    "Reset Password": "Redefinir Senha",
+    "If you did not request a password reset, no further action is required.": "Se você não solicitou uma redefinição de senha, nenhuma ação é necessária.",
+    "Verify Email Address": "Verifique o Endereço de Email",
+    "Please click the button below to verify your email address.": "Por favor clique no botão abaixo para verificar seu endereço de email.",
+    "If you did not create an account, no further action is required.": "Se você não criou uma conta, nenhuma ação é necessária.",
+    "Verify Your Email Address": "Verifique seu Endereço de Email",
+    "A fresh verification link has been sent to your email address.": "Um link de verificação foi enviado para o seu endereço de email.",
+    "Before proceeding, please check your email for a verification link.": "Antes de proceder, por favor verifique seu endereço de email através do link enviado.",
+    "If you did not receive the email": "Se você não recebeu o email",
+    "click here to request another": "clique aqui para solicitar novamente"
 }
