@@ -1,4 +1,4 @@
-let mix = require('laravel-mix');
+const mix = require('laravel-mix');
 
 /*
  |--------------------------------------------------------------------------
@@ -11,15 +11,15 @@ let mix = require('laravel-mix');
  |
  */
 
-mix.js('resources/assets/js/app.js', 'public/js')
+mix.js('resources/js/app.js', 'public/js')
     .extract(['codemirror'])
-    .sass('resources/assets/sass/app.scss', 'public/css')
+    .sass('resources/sass/app.scss', 'public/css')
     .copy('node_modules/sweetalert2/dist/sweetalert2.min.js', 'public/js/sweetalert2.min.js')
     .copy('node_modules/sweetalert2/dist/sweetalert2.min.css', 'public/css/sweetalert2.min.css')
     .webpackConfig({
         resolve: {
             alias: {
-                '@': path.resolve(__dirname, 'resources/assets/js/'),
+                '@': path.resolve(__dirname, 'resources/js/'),
             },
         },
     });
