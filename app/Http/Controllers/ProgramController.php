@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Program;
 use App\ProgrammingLanguage;
+use App\Services\TargetCompiler;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Natalnet\Relex\FunctionSymbol;
@@ -164,48 +165,7 @@ class ProgramController extends Controller
 
     public function compileTarget(Program $program)
     {
-        $code = $program->custom_code;
-        $programName = $program->name;
-
-
-        $language = $program->language;
-//        $language->addMediaFromUrl("http://weduc.dev/zip")->usingFileName('send1.zip')->toMediaCollection('send');
-
-        $origin = "".$language->getFirstMedia('compile')->getPath();
-        $compiler_path = '../storage/app/language_files/'.$language->getFirstMedia('compile')->id;
-        $dest = '../storage/app/program_files/'.$program->id.'/compilation/'.$program->name;
-
-
-        // Compilação na linguagem alvo:
-
-        // Remove (se existir) e cria a pasta do programa
-        shell_exec("rm -R ".$dest);
-        shell_exec("mkdir -p ".$dest);
-
-        //Copia os arquivos de include e extrai na pasta
-        //shell_exec("unzip ".$origin." -d ".$dest);
-
-        // Coloca o código do programa na pasta temporária
-        Storage::disk('program_files')->put($program->id.'/compilation/'.$programName.'/'.$programName.'.'.$language->extension, $code);
-
-        // Define o arquivo onde ficarão os comandos do Make
-        $comando =   $language->compile_code;
-
-        $comando = str_replace("diretorio", $dest, $comando);
-        $comando = str_replace("localdocompilador", $compiler_path, $comando);
-        $comando = str_replace("nomedoprograma", $programName, $comando);
-
-        //dd($comando);
-
-        Storage::disk('program_files')->put($program->id.'/compilation/'.$programName.'/'.'weduc.sh', $comando);
-
-        // Prepara o comando Make
-        $makeCommand = "/bin/bash ".$dest."/weduc.sh";
-
-        // Iniciei a compilacao na linguagem
-        exec($makeCommand, $output, $returnVar);
-
-        abort_unless($returnVar == 0, 400, implode("\n", $output));
+        TargetCompiler::compile($program);
 
         return response(null, 204);
     }
@@ -231,7 +191,7 @@ class ProgramController extends Controller
 
     public function sendCode(Program $program)
     {
-        $this->compileTarget($program);
+        TargetCompiler::compile($program);
 
         $language = $program->language;
 

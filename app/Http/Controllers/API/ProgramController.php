@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Events\ProgramCompiled;
 use App\Program;
 use App\ProgrammingLanguage;
+use App\Services\TargetCompiler;
 use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -189,6 +190,13 @@ class ProgramController extends Controller
             'success' => true,
             'target_code' => $program->custom_code
         ];
+    }
+
+    public function compileTarget(Program $program)
+    {
+        TargetCompiler::compile($program);
+
+        return response(null, 204);
     }
 
     protected function getFunctionParams($functionCode)
