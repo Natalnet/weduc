@@ -14,12 +14,12 @@
         "laravel/telescope": "^1.0",
         "laravel/tinker": "^1.0",
         "natalnet/relex": "dev-master",
+        "almeidafranci/laravel-obrsimulada": "dev-master",
         "spatie/laravel-medialibrary": "^7.0",
         "spatie/laravel-permission": "^2.7"
     },
     "require-dev": {
         "beyondcode/laravel-dump-server": "^1.0",
-        "barryvdh/laravel-debugbar": "^3.1",
         "filp/whoops": "^2.0",
         "fzaninotto/faker": "^1.8",
         "mockery/mockery": "^1.0",
@@ -67,8 +67,8 @@
     "repositories": [
         {
             "type": "path",
-	    "url": "../../Packages/relex",
-	    "options": {
+            "url": "../../Packages/relex",
+            "options": {
                 "symlink": true
             }
         }
