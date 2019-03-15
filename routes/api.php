@@ -37,3 +37,5 @@ Route::post('/classrooms', 'API\ClassroomController@store');
 Route::post('/classrooms/join', 'API\ClassroomController@join');
 Route::get('/classrooms/coaching', 'API\ClassroomController@coaching');
 Route::get('/classrooms/studying', 'API\ClassroomController@studying');
+
+Route::get('/obr-simulada/version/{os}', 'API\ObrSimuladaController@version');
