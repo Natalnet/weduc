@@ -7,6 +7,7 @@ use App\Program;
 use App\ProgrammingLanguage;
 use App\Services\TargetCompiler;
 use App\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Validation\Rule;
@@ -84,6 +85,8 @@ class ProgramController extends Controller
 
     public function compile(Request $request, Program $program)
     {
+        $started_at = Carbon::now()->toDateTimeString();
+
         try {
             // Create a new Redux Lexer from the code to be compiled
             $lexer = new ReducLexer($program->reduc_code);
@@ -182,13 +185,17 @@ class ProgramController extends Controller
                         'line' => $line,
                         'message' => $message
                     ]
-                ]
+                ],
+                'started_at' => $started_at,
+                'finished_at' => Carbon::now()
             ], 422);
         }
 
         return [
             'success' => true,
-            'target_code' => $program->custom_code
+            'target_code' => $program->custom_code,
+            'started_at' => $started_at,
+            'finished_at' => Carbon::now()->toDateTimeString()
         ];
     }
 
