@@ -11,7 +11,7 @@
                     </button>
                 </div>
             </div>
-            <div class="col-lg-3 col-md-6">
+            <div class="col-lg-9 col-md-6">
                 <template v-if="selectedProgram">
                     <pre class="pre-scrollable"><code>{{selectedProgram.reduc_code}}</code></pre>
                 </template>

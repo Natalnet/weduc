@@ -68554,7 +68554,7 @@ var render = function() {
         _vm._v(" "),
         _c(
           "div",
-          { staticClass: "col-lg-3 col-md-6" },
+          { staticClass: "col-lg-9 col-md-6" },
           [
             _vm.selectedProgram
               ? [
