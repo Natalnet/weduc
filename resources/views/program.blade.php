@@ -46,7 +46,8 @@
 @section('content')
 <notifications group="ide" position="bottom right" ></notifications>
 <ide inline-template :languages='{{ $test }}'>
-<div class="container-fluid animated fadeIn" v-cloak v-if="language">
+    <div>
+        <div class="container-fluid animated fadeIn" v-cloak v-if="language">
     <div class="row mb-3">
         <div class="col-lg-9">
             <ul class="nav nav-pills">
@@ -79,8 +80,8 @@
                         <div class="input-group bg-white">
                             <input class="form-control" type="text" id="nome-do-programa" v-model="program.name" :disabled="disableNameInput == true">
                             <span class="input-group-append">
-                                <button class="btn btn-outline-info" @click="save">
-                                    <i class="fa fa-floppy-o" aria-hidden="true"></i> Salvar
+                                <button class="btn btn-outline-primary" @click="save">
+                                    <i class="fas fa-save" aria-hidden="true"></i> Salvar
                                 </button>
                                 <button v-if="programExists && mode === 'reduc'" class="btn btn-outline-warning" @click="compile">
                                     <i class="fa fa-code" aria-hidden="true"></i> Compilar
@@ -89,27 +90,21 @@
                                     <i class="fa fa-code" aria-hidden="true"></i> Compilar Alvo
                                 </button>
                                 <a v-if="programExists && targetCanSend" :href="downloadUrl" class="btn btn-outline-success" target="_blank" v-if="disableNameInput == true">
-                                    <i class="fa fa-paper-plane-o" aria-hidden="true"></i> Enviar
+                                    <i class="fas fa-paper-plane" aria-hidden="true"></i> Enviar
                                 </a>
                                 <button class="btn btn-outline-primary" title="Solicitar Correção" disabled="disabled">
-                                    <i class="fa fa-check" aria-hidden="true"></i>
+                                    <i class="fas fa-check" aria-hidden="true"></i>
                                 </button>
                                 <button class="btn btn-outline-primary" title="Download" disabled="disabled">
-                                    <i class="fa fa-download" aria-hidden="true"></i>
+                                    <i class="fas fa-download" aria-hidden="true"></i>
                                 </button>
                                 <button class="btn btn-outline-primary" id="btn-new" @click="newProgram" title="Novo">
-                                    <i class="fa fa-file-o" aria-hidden="true"></i>
+                                    <i class="fas fa-file" aria-hidden="true"></i>
                                 </button>
-                                <div class="btn-group b-dropdown dropdown">
-                                    <a class="btn btn-outline-primary btn-square dropdown-toggle" href="#" role="button"
-                                       id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-                                       style="margin-left: -1px;">
-                                        <i class="fa fa-folder-open-o" aria-hidden="true"></i>
-                                    </a>
-                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                        <a v-for="item of programs" class="dropdown-item" href="#" @click="loadProgram(item)">@{{ item.name }}</a>
-                                    </div>
-                                </div>
+                                <button class="btn btn-outline-primary" id="btn-new"
+                                        data-toggle="modal" data-target="#programslist" title="Abrir">
+                                    <i class="fas fa-folder-open" aria-hidden="true"></i>
+                                </button>
                             </span>
                         </div>
                         @guest
@@ -140,7 +135,29 @@
             <div id="blocklyDiv" style="height: 480px; width: 100%;"></div>
         </div>
     </div>
+
+    <portal to="modals">
+        <programs-list-modal :language-id="language.id" ref="programsList"
+                             @open-program="loadProgram"></programs-list-modal>
+    </portal>
 </div>
+        <div class="container-fluid" v-else>
+            <card class="text-center">
+                <h2 class="card-title">Selecione uma linguagem</h2>
+                <div class="row justify-content-md-center">
+                    <div class="col-md-4">
+                        <select v-model="selected_language" class="custom-select custom-select-lg mb-3">
+                            <option value="" selected>Selecione...</option>
+                            <option v-for="( language, index ) in languages" v-bind:value="index">
+                                @{{ language }}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+                <button type="button" class="btn btn-primary btn-lg" @click="loadLanguage(selected_language)">Programar</button>
+            </card>
+        </div>
+    </div>
 </ide>
 @endsection
 

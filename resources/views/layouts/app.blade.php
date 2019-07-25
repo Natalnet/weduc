@@ -17,7 +17,6 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Main styles for this application -->
-    <link href="/css/sweetalert2.min.css" rel="stylesheet">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
     <!-- Scripts -->
@@ -69,13 +68,14 @@
         </div>
 
         @include('parts.footer')
+
+        <portal-target name="modals"></portal-target>
     </div>
 
     <!-- Bootstrap and necessary plugins -->
     <script src="{{ mix('js/manifest.js') }}"></script>
     <script src="{{ mix('js/vendor.js') }}"></script>
     <script src="{{ mix('js/app.js') }}"></script>
-    <script src="/js/sweetalert2.min.js"></script>
 
     @stack('bottom-scripts')
 

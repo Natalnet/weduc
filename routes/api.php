@@ -27,6 +27,7 @@ Route::get('/programs/user/current', 'API\ProgramController@indexForCurrentUser'
 Route::get('/programs/user/current/language/{language}', 'API\ProgramController@indexForCurrentUserAndLanguage');
 Route::get('/programs/user/{user}', 'API\ProgramController@indexForUser');
 Route::put('/programs/{program}', 'API\ProgramController@update');
+Route::delete('/programs/{program}', 'API\ProgramController@destroy');
 Route::get('/programs/{program}/compile', 'API\ProgramController@compile');
 
 Route::get('/metrics/compilation-errors', 'API\MetricsController@compilationErrors');

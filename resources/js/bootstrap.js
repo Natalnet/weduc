@@ -1,5 +1,7 @@
 
 window._ = require('lodash');
+window.swal = require('sweetalert');
+
 
 /**
  * We'll load jQuery and the Bootstrap jQuery plugin which provides support

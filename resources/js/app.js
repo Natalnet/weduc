@@ -19,8 +19,11 @@ import Atom from './Atom'
  * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
  */
 
-// const files = require.context('./', true, /\.vue$/i)
-// files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key)))
+const files = require.context('./components/', true, /\.vue$/i)
+files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key)))
+
+const view_files = require.context('./views/', true, /\.vue$/i)
+view_files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], view_files(key)))
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -30,10 +33,10 @@ import Atom from './Atom'
 import './components'
 
 /**
- * Sweetalert2 for Vue
+ * PortalVue
  */
-import VueSweetalert2 from 'vue-sweetalert2';
-Vue.use(VueSweetalert2);
+import PortalVue from 'portal-vue'
+Vue.use(PortalVue);
 
 /**
  * Notifications

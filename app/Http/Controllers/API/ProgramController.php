@@ -226,4 +226,11 @@ class ProgramController extends Controller
 
         return array_values($parameters);
     }
+
+    public function destroy(Program $program)
+    {
+        $program->delete();
+
+        return response(null, 204);
+    }
 }

@@ -5,6 +5,7 @@ Vue.component('ide', {
         return {
             user: null,
             errors: '',
+            selected_language: '',
             language: '',
             programs: [],
             program: {
@@ -15,30 +16,8 @@ Vue.component('ide', {
             },
             disableNameInput: 0,
             blockly: false,
-            mode: 'reduc'
+            mode: 'reduc',
         };
-    },
-
-    mounted() {
-        this.$swal({
-            title: 'Selecione uma linguagem para programar',
-            input: 'select',
-            inputOptions: this.languages,
-            inputValidator: value => {
-                return new Promise((resolve, reject) => {
-                    if (value) {
-                        this.loadLanguage(value)
-                        resolve()
-                    } else {
-                        reject('Você precisa selecionar uma opção!')
-                    }
-                })
-            },
-            inputClass: 'form-control',
-            inputPlaceholder: 'Selecione',
-            allowOutsideClick: false,
-            allowEscapeKey: false,
-        })
     },
 
     computed: {
@@ -74,20 +53,19 @@ Vue.component('ide', {
         },
 
         loadLanguage(value) {
-            axios.get('/fetchlanguage/'+value)
-            .then(response => {
-                this.language = response.data
-                this.fetchPrograms()
-            })
-            .catch(error => console.log(error))
-        },
-
-        fetchPrograms() {
-            axios.get('api/programs/user/current/language/' + this.language.id)
-                .then(response => {
-                    this.programs = response.data
-                })
-                .catch(error => console.log(error))
+            if (value) {
+                axios.get('/fetchlanguage/'+value)
+                    .then(response => {
+                        this.language = response.data
+                    })
+                    .catch(error => console.log(error))
+            } else {
+                this.$notify({
+                    group: 'ide',
+                    type: 'error',
+                    title: 'Selecione uma linguagem!',
+                });
+            }
         },
 
         setupBlockly() {
@@ -133,7 +111,7 @@ Vue.component('ide', {
             })
             .then(response => {
                 this.$emit('program-created');
-                this.fetchPrograms()
+                this.$refs.programsList.fetchPrograms()
                 this.loadProgram(response.data)
                 this.$notify({
                     group: 'ide',
@@ -160,7 +138,8 @@ Vue.component('ide', {
                 reduc_code: this.program.code
             })
             .then(response => {
-                this.$emit('program-created');
+                this.$emit('program-updated');
+                this.$refs.programsList.fetchPrograms()
                 this.$notify({
                     group: 'ide',
                     type: 'success',
