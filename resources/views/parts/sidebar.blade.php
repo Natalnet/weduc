@@ -58,11 +58,6 @@
             <li class="nav-title">
                 Administrador
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{{ route('compilers') }}">
-                    <i class="nav-icon fas fa-cogs"></i> Compiladores
-                </a>
-            </li>
             <li class="divider"></li>
             <li class="nav-item">
                 <a class="nav-link" href="{{ url('/log-viewer') }}">
