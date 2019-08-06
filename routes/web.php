@@ -36,6 +36,7 @@ Route::get('/languages/user/current', 'ProgrammingLanguageController@byUser')->n
 Route::resource('functions', 'FunctionController', ['except' => ['create']]);
 Route::get('/functions/create/{language}', 'FunctionController@create')->name('functions.create');
 Route::get('/funcoes/linguagem/{language}', 'FunctionController@byLanguage')->name('functions.by-language');
+Route::delete('/functions/{function}', 'FunctionController@destroy')->name('functions.destroy');
 
 Route::post('/program', 'ProgramController@store');
 Route::put('/program/{program}', 'ProgramController@update');

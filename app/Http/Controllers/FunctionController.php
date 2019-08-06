@@ -67,7 +67,7 @@ class FunctionController extends Controller
         ]);
 
         $function = ReducFunction::create($request->all());
-        return $this->byLanguage($function->language);
+        return redirect()->route('functions.by-language', $function->language);
     }
 
     /**
@@ -112,17 +112,19 @@ class FunctionController extends Controller
 
         $function = ReducFunction::find($id);
         $function->fill($request->all())->save();
-        return $this->byLanguage($function->language);
+        return redirect()->route('functions.by-language', $function->language);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  ReducFunction  $function
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(ReducFunction $function)
     {
-        //
+        $function->delete();
+
+        return redirect()->back();
     }
 }

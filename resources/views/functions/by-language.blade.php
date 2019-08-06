@@ -35,9 +35,17 @@
                                     <a href="{{  route('functions.edit', ['function' => $function->id]) }}" class="btn btn-outline-primary btn-sm">
                                         Editar função
                                     </a>
-                                    <a href="/weduc/linguagem/excluir/{{ $function->id }}" class="btn btn-outline-primary btn-sm">
+                                    <a href="{{ route('functions.destroy', $function) }}" class="btn btn-outline-primary btn-sm"
+                                       onclick="event.preventDefault();
+                                       document.getElementById('destroy-form-{{ $function->id }}').submit();">
                                         Excluir função
                                     </a>
+
+                                    <form id="destroy-form-{{ $function->id }}" action="{{ route('functions.destroy', $function) }}"
+                                          method="POST" style="display: none;">
+                                        @csrf
+                                        @method('DELETE')
+                                    </form>
                                 </td>
 
                             </tr>
