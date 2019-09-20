@@ -39,4 +39,21 @@ Route::post('/classrooms/join', 'API\ClassroomController@join');
 Route::get('/classrooms/coaching', 'API\ClassroomController@coaching');
 Route::get('/classrooms/studying', 'API\ClassroomController@studying');
 
-Route::get('/obr-simulada/version/{os}', 'API\ObrSimuladaController@version');
+Route::prefix('/obr-simulada')->namespace('API')->group(function () {
+    Route::get('/version/{os}', 'ObrSimuladaController@version');
+
+    Route::prefix('/arenas')->middleware('auth:api')->group(function () {
+        Route::get('/', 'ArenaController@index');
+        Route::post('/', 'ArenaController@store');
+        Route::get('/{arena}', 'ArenaController@show');
+        Route::put('/{arena}', 'ArenaController@update');
+        Route::delete('/{arena}', 'ArenaController@destroy');
+
+        Route::prefix('/{arena}/usages')->group(function () {
+            Route::get('/', 'ArenaUsageController@arenaIndex');
+            Route::post('/', 'ArenaUsageController@store');
+            Route::get('/average', 'ArenaUsageController@average');
+        });
+    });
+});
+
