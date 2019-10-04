@@ -24,4 +24,10 @@ class LanguageController extends Controller
     {
         return $language->functions;
     }
+
+
+    public function downloadSending(ProgrammingLanguage $language)
+    {
+        return response()->download($language->getFirstMedia('send')->getPath(), $language->id.'.zip');
+    }
 }

@@ -21,6 +21,7 @@ Route::get('/users/', 'API\UserController@index');
 
 Route::get('/languages/', 'API\LanguageController@index');
 Route::get('/languages/{language}/functions', 'API\LanguageController@functions');
+Route::get('/languages/{language}/download/sending', 'API\LanguageController@downloadSending');
 
 Route::post('/programs/', 'API\ProgramController@store');
 Route::get('/programs/user/current', 'API\ProgramController@indexForCurrentUser');
