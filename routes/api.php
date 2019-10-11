@@ -19,26 +19,32 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::get('/users/', 'API\UserController@index');
 
-Route::get('/languages/', 'API\LanguageController@index');
-Route::get('/languages/{language}/functions', 'API\LanguageController@functions');
-Route::get('/languages/{language}/download/sending', 'API\LanguageController@downloadSending');
+Route::prefix('/languages')->namespace('API')->group(function () {
+    Route::get('/', 'LanguageController@index');
+    Route::get('/{language}/functions', 'LanguageController@functions');
+    Route::get('/{language}/download/sending', 'LanguageController@downloadSending');
+});
 
-Route::post('/programs/', 'API\ProgramController@store');
-Route::get('/programs/user/current', 'API\ProgramController@indexForCurrentUser');
-Route::get('/programs/user/current/language/{language}', 'API\ProgramController@indexForCurrentUserAndLanguage');
-Route::get('/programs/user/{user}', 'API\ProgramController@indexForUser');
-Route::put('/programs/{program}', 'API\ProgramController@update');
-Route::delete('/programs/{program}', 'API\ProgramController@destroy');
-Route::get('/programs/{program}/compile', 'API\ProgramController@compile');
+Route::prefix('/programs')->namespace('API')->group(function () {
+    Route::post('/', 'ProgramController@store');
+    Route::get('/user/current', 'ProgramController@indexForCurrentUser');
+    Route::get('/user/current/language/{language}', 'ProgramController@indexForCurrentUserAndLanguage');
+    Route::get('/user/{user}', 'ProgramController@indexForUser');
+    Route::put('/{program}', 'ProgramController@update');
+    Route::delete('/{program}', 'ProgramController@destroy');
+    Route::get('/{program}/compile', 'ProgramController@compile');
+});
 
 Route::get('/metrics/compilation-errors', 'API\MetricsController@compilationErrors');
 Route::get('/metrics/compilations-per-day', 'API\MetricsController@compilationsPerDay');
 
-Route::get('/classrooms', 'API\ClassroomController@index');
-Route::post('/classrooms', 'API\ClassroomController@store');
-Route::post('/classrooms/join', 'API\ClassroomController@join');
-Route::get('/classrooms/coaching', 'API\ClassroomController@coaching');
-Route::get('/classrooms/studying', 'API\ClassroomController@studying');
+Route::prefix('/classrooms')->namespace('API')->group(function () {
+    Route::get('/', 'ClassroomController@index');
+    Route::post('/', 'ClassroomController@store');
+    Route::post('/join', 'ClassroomController@join');
+    Route::get('/coaching', 'ClassroomController@coaching');
+    Route::get('/studying', 'ClassroomController@studying');
+});
 
 Route::prefix('/obr-simulada')->namespace('API')->group(function () {
     Route::get('/version/{os}', 'ObrSimuladaController@version');
