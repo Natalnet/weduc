@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\API;
 
+use App\SBoticsRelease;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -9,19 +10,10 @@ class ObrSimuladaController extends Controller
 {
     public function version($os)
     {
-        switch ($os) {
-            case 'windows':
-                $version = 'v1.0-beta';
-                break;
-            case 'osx':
-                $version = 'v1.0-beta';
-                break;
-            default:
-                $version = null;
-        }
+        $release = SBoticsRelease::where('os', $os)->orderByDesc('released_at')->latest()->firstOrFail();
 
         return response()->json([
-            'version' => $version
+            'version' => $release->version
         ]);
     }
 }

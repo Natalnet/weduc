@@ -64,6 +64,19 @@
                     <i class="nav-icon fas fa-archive"></i> Logs
                 </a>
             </li>
+
+            <li class="nav-item nav-dropdown">
+                <a class="nav-link nav-dropdown-toggle" href="#">
+                    <i class="nav-icon fas fa-desktop"></i> sBotics
+                </a>
+                <ul class="nav-dropdown-items">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('s_botics_releases.latest') }}">
+                            <i class="nav-icon fas fa-code-branch"></i> Versões
+                        </a>
+                    </li>
+                </ul>
+            </li>
             <li class="divider"></li>
             @endrole
             <li class="nav-item mt-auto">
