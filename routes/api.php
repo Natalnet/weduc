@@ -19,7 +19,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::get('/users/', 'API\UserController@index');
 
-Route::prefix('/languages')->namespace('API')->group(function () {
+Route::prefix('/languages')->middleware('throttle:60,1')->namespace('API')->group(function () {
     Route::get('/', 'LanguageController@index');
     Route::get('/{language}/functions', 'LanguageController@functions');
     Route::get('/{language}/download/sending', 'LanguageController@downloadSending');
@@ -33,6 +33,7 @@ Route::prefix('/programs')->namespace('API')->group(function () {
     Route::put('/{program}', 'ProgramController@update');
     Route::delete('/{program}', 'ProgramController@destroy');
     Route::get('/{program}/compile', 'ProgramController@compile');
+    Route::get('/{program}/download/sender', 'ProgramController@downloadCodeSender');
 });
 
 Route::get('/metrics/compilation-errors', 'API\MetricsController@compilationErrors');

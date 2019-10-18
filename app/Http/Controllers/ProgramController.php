@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Program;
 use App\ProgrammingLanguage;
+use App\Services\CodeSender;
 use App\Services\TargetCompiler;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -193,57 +194,9 @@ class ProgramController extends Controller
     {
         TargetCompiler::compile($program);
 
-        $language = $program->language;
+        $codeSender = (new CodeSender())->for($program)->prepare()->makeClient();
 
-        $origin = "".$language->getFirstMedia('send')->getPath();
-        $dest = '../storage/app/program_files/'.$program->id.'/sending';
-
-
-        // Compilação na linguagem alvo:
-
-        // Remove (se existir) e cria a pasta temporária
-        shell_exec("rm -R ".$dest);
-        shell_exec("mkdir ".$dest);
-
-        //Extrai o pacote default na pasta
-        shell_exec("unzip ".$origin." -d ".$dest);
-        shell_exec("unzip ../storage/app/default_files/weducClient.zip -d ".$dest);
-
-        //Copia as classes Java default na pasta
-        shell_exec("cp ../storage/app/default_files/HttpDownloadUtility.java ".$dest."/HttpDownloadUtility.java");
-        shell_exec("cp ../storage/app/default_files/WeducClient.java ".$dest."/WeducClient.java");
-
-        //read the entire string
-        $weducClient=file_get_contents($dest."/WeducClient.java");
-
-        //replace something in the file string
-        $weducClient=str_replace('$LINGUAGEM', $language->id, $weducClient);
-
-        $programDownloadUrl = url('/program/'.$program->id.'/download');
-        $weducClient=str_replace('$DOWNLOAD_URL', $programDownloadUrl, $weducClient);
-
-        $jsscDownloadUrl = url('/program/'.$program->id.'/download/jssc');
-        $weducClient=str_replace('$JSSC_DOWNLOAD_URL', $jsscDownloadUrl, $weducClient);
-
-        $languageFilesDownloadUrl = url('/download/envio/linguagem/'.$language->id);
-        $weducClient=str_replace('$LANGUAGE_FILES_URL', $languageFilesDownloadUrl, $weducClient);
-
-        $sendCode = $language->send_code;
-        $sendCode = str_replace("nomedoprograma", $program->name, $sendCode);
-        $weducClient=str_replace('$SEND_CODE', $sendCode, $weducClient);
-
-        //write the entire string
-        file_put_contents($dest."/WeducClient.java", $weducClient);
-
-        $command = "cd ".$dest;
-        $command .= " && /usr/bin/javac *.java -classpath jssc.jar";
-        $command .= " && /usr/bin/jar vcfm ".$program->name.".jar manifest.mf *.class";
-
-        Storage::disk('program_files')->put($program->id.'/sending/execution.sh', $command);
-
-        exec('/bin/bash '.$dest.'/execution.sh');
-
-        return response()->download($dest.'/'.$program->name.'.jar');
+        return response()->download($codeSender->senderPath());
     }
 
     /**

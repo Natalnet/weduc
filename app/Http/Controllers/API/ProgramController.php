@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Events\ProgramCompiled;
 use App\Program;
 use App\ProgrammingLanguage;
+use App\Services\CodeSender;
 use App\Services\TargetCompiler;
 use App\User;
 use Carbon\Carbon;
@@ -204,6 +205,13 @@ class ProgramController extends Controller
         TargetCompiler::compile($program);
 
         return response(null, 204);
+    }
+
+    public function downloadCodeSender(Program $program)
+    {
+        $codeSender = (new CodeSender())->for($program)->prepare()->makeClient();
+
+        return response()->download($codeSender->senderPath());
     }
 
     protected function getFunctionParams($functionCode)
