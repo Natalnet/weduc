@@ -10,14 +10,7 @@ class TargetCompiler
 {
     public static function compile(Program $program)
     {
-        $code = $program->custom_code;
-        $language = $program->language;
-
-        $dest = self::getDestinationPath($program);
-
-        self::clearDestination($dest);
-
-        Storage::disk('program_files')->put($program->id.'/compilation/'.$program->name.'/'.$program->name.'.'.$language->extension, $code);
+        self::createTargetCodeFile($program);
 
         $script = self::prepareCompilationScript($program);
 
@@ -59,5 +52,20 @@ class TargetCompiler
         Storage::disk('program_files')->put($program->id.'/compilation/'.$program->name.'/'.'weduc.sh', $command);
 
         return $dest_path."/weduc.sh";
+    }
+
+    /**
+     * @param Program $program
+     */
+    public static function createTargetCodeFile(Program $program): void
+    {
+        $code = $program->custom_code;
+        $language = $program->language;
+
+        $dest = self::getDestinationPath($program);
+
+        self::clearDestination($dest);
+
+        Storage::disk('program_files')->put($program->id . '/compilation/' . $program->name . '/' . $program->name . '.' . $language->extension, $code);
     }
 }

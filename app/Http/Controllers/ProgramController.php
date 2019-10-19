@@ -178,6 +178,8 @@ class ProgramController extends Controller
 
     public function downloadProgram(Program $program)
     {
+        TargetCompiler::createTargetCodeFile($program);
+
         $fileName = $program->language->sent_extension;
         $fileName = str_replace("nomedoprograma", $program->name, $fileName);
         $filePath = '../storage/app/program_files/'.$program->id.'/compilation/'.$program->name.'/'.$fileName;
@@ -192,8 +194,6 @@ class ProgramController extends Controller
 
     public function sendCode(Program $program)
     {
-        TargetCompiler::compile($program);
-
         $codeSender = (new CodeSender())->for($program)->prepare()->makeClient();
 
         return response()->download($codeSender->senderPath());
