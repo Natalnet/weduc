@@ -62,10 +62,12 @@ class TargetCompiler
         $code = $program->custom_code;
         $language = $program->language;
 
-        $dest = self::getDestinationPath($program);
+        if ($language->compile_code === null) {
+            $dest = self::getDestinationPath($program);
 
-        self::clearDestination($dest);
+            self::clearDestination($dest);
 
-        Storage::disk('program_files')->put($program->id . '/compilation/' . $program->name . '/' . $program->name . '.' . $language->extension, $code);
+            Storage::disk('program_files')->put($program->id . '/compilation/' . $program->name . '/' . $program->name . '.' . $language->extension, $code);
+        }
     }
 }
