@@ -178,7 +178,9 @@ class ProgramController extends Controller
 
     public function downloadProgram(Program $program)
     {
-        TargetCompiler::createTargetCodeFile($program);
+        if ($program->language->compile_code === null) {
+            TargetCompiler::createTargetCodeFile($program);
+        }
 
         $fileName = $program->language->sent_extension;
         $fileName = str_replace("nomedoprograma", $program->name, $fileName);
