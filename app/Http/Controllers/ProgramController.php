@@ -196,8 +196,6 @@ class ProgramController extends Controller
 
     public function sendCode(Program $program)
     {
-        TargetCompiler::createTargetCodeFile($program);
-
         $codeSender = (new CodeSender())->for($program)->prepare()->makeClient();
 
         return response()->download($codeSender->senderPath());
