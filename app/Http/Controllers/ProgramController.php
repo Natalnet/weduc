@@ -180,6 +180,8 @@ class ProgramController extends Controller
     {
         if ($program->language->compile_code === null) {
             TargetCompiler::createTargetCodeFile($program);
+        } else {
+            TargetCompiler::compile($program);
         }
 
         $fileName = $program->language->sent_extension;
