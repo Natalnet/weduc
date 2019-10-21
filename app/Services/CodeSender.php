@@ -27,6 +27,8 @@ class CodeSender
         $this->origin = "".$language->getFirstMedia('send')->getPath();
         $this->destination = '../storage/app/program_files/'.$this->program->id.'/sending';
 
+        Storage::disk('program_files')->makeDirectory($this->program->id.'/sending');
+
         $this->handleDefaultFiles();
         $this->handleSubstitutions();
 
