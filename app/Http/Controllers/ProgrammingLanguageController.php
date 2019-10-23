@@ -100,7 +100,7 @@ class ProgrammingLanguageController extends Controller
             'description',
             'extension',
             'header',
-            'footnote',
+            'footer',
             'main_function',
             'name',
             'other_functions',

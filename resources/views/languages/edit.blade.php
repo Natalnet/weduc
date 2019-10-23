@@ -218,19 +218,19 @@
                             </div>
 
                             <div class="form-group col-md-6">
-                                <label for="footnote">Rodapé</label>
+                                <label for="footer">Rodapé</label>
                                 <textarea
                                     type="text"
                                     class="form-control"
-                                    name="footnote"
-                                    id="footnote"
+                                    name="footer"
+                                    id="footer"
                                     placeholder="Rodapé"
                                     rows="6"
-                                >{{ old('footnote', $language->footnote) }}</textarea>
+                                >{{ old('footer', $language->footer) }}</textarea>
 
-                                @if ($errors->has('footnote'))
+                                @if ($errors->has('footer'))
                                     <div class="invalid-feedback" style="display: block;">
-                                        <strong>{{ $errors->first('footnote') }}</strong>
+                                        <strong>{{ $errors->first('footer') }}</strong>
                                     </div>
                                 @endif
                             </div>
