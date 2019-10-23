@@ -133,6 +133,7 @@ class ProgramController extends Controller
             $trans->setElseStatement($controlFlow->else);
             $trans->setRepeatStatement($controlFlow->repeat_code);
             $trans->setWhileStatement($controlFlow->while_code);
+            $trans->setForStatement($controlFlow->for_code);
             $trans->setOperators([
                 ReducLexer::T_E => '&&',
                 ReducLexer::T_OU => '||',
