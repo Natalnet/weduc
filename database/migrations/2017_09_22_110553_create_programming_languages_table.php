@@ -25,7 +25,7 @@ class CreateProgrammingLanguagesTable extends Migration
             $table->string('compiler_file');
             $table->string('extension');
             $table->text('header')->nullable();
-            $table->text('footnote')->nullable();
+            $table->text('footer')->nullable();
             $table->string('main_function');
             $table->string('other_functions');
             $table->string('send_code');
