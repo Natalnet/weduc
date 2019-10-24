@@ -120,7 +120,7 @@ class ProgramController extends Controller
                 $parser->symbolTable->define(new FunctionSymbol($function->name, $returnType, $parameters));
             }
 
-            $parser->program();
+            $parser->parse();
 
             $trans = new Translator($parser->parseTree);
 

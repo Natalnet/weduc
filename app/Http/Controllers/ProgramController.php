@@ -84,7 +84,7 @@ class ProgramController extends Controller
                 $parser->symbolTable->define(new FunctionSymbol($function->name, $returnType, $parameters));
             }
 
-            $parser->program();
+            $parser->parse();
         } catch (\Exception $e) {
             // report($e);
             return response()->json([
@@ -149,7 +149,7 @@ class ProgramController extends Controller
         ";
         $lexer = new ReducLexer($str);
         $parser = new ReducParser($lexer);
-        $parser->program();
+        $parser->parse();
         $program = $parser->parseTree->getNode();
         foreach ($program->getChildren() as $node) {
             if ($node->getValue() == 'commands') {

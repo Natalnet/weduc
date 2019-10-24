@@ -66,11 +66,8 @@
     },
     "repositories": [
         {
-            "type": "path",
-            "url": "../../Packages/relex",
-            "options": {
-                "symlink": true
-            }
+            "type": "vcs",
+            "url": "https://github.com/Natalnet/relex"
         }
     ]
 }
