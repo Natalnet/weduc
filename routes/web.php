@@ -51,6 +51,10 @@ Route::get('/classrooms', 'ClassroomController@index')->name('classrooms.index')
 Route::get('/classrooms/enrolled', 'ClassroomController@index')->name('classrooms');
 Route::get('/coaching', 'ClassroomController@coaching')->name('coaching');
 
+Route::get('/sbotics', function () {
+    return view('sbotics');
+})->name('sbotics');
+
 Route::prefix('/s-botics')->middleware('auth')->group(function () {
     Route::get('/releases', 'SBoticsReleaseController@latest')->name('s_botics_releases.latest');
     Route::post('/releases', 'SBoticsReleaseController@store')->name('s_botics_releases.store');

@@ -9,6 +9,7 @@
                 <hr>
                 <form class="form-horizontal" method="POST" action="{{ route('register') }}">
                     {{ csrf_field() }}
+                    <input type="hidden" name="redirect" value="{{ request('redirect') }}">
 
                     <div class="mb-3">
                         <div class="input-group">

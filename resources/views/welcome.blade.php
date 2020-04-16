@@ -90,7 +90,7 @@
                     <a href="http://www.natalnet.br">Natalnet</a>
                     <a href="http://laica.ifrn.edu.br">LAICA</a>
                     <a href="https://github.com/natalnet/weduc">GitHub</a>
-                    <a href="{{ route('obrsimulada') }}">OBR Simulada</a>
+                    <a href="{{ route('sbotics') }}">sBotics</a>
                 </div>
             </div>
         </div>
