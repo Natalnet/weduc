@@ -35,7 +35,7 @@
     "dependencies": {
         "codemirror": "^5.40.2",
         "form-backend-validation": "^2.3.3",
-        "npm": "^5.8.0",
+        "npm": "^6.13.4",
         "portal-vue": "^2.1.5",
         "sweetalert": "^2.1.2",
         "vue-async-computed": "^3.5.0",
