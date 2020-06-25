@@ -96,6 +96,8 @@ class ProgramController extends Controller
         }
         $trans = new Translator($parser->parseTree);
         $trans->setMainFunction($language->main_function);
+        $trans->setTaskDeclaration($language->other_functions);
+        $trans->setCallFunction($language->call_function);
         $trans->setInstructionSeparator(';');
 
         $controlFlow = $language->controlFlowStatements()->first();
