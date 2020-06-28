@@ -136,6 +136,8 @@ class ProgramController extends Controller
             $trans->setRepeatStatement($controlFlow->repeat_code);
             $trans->setWhileStatement($controlFlow->while_code);
             $trans->setForStatement($controlFlow->for_code);
+            $trans->setSwitchStatement($controlFlow->switch_code);
+            $trans->setSwitchCaseStatement($controlFlow->case);
             $trans->setOperators([
                 ReducLexer::T_E => '&&',
                 ReducLexer::T_OU => '||',
