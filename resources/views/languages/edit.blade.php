@@ -856,6 +856,36 @@
 
                         <div class="row">
                             <div class="form-group col-md-6">
+                                <label for="control_flow_for">Para</label>
+                                <textarea type="text" class="form-control" name="control_flow_for" id="control_flow_for"
+                                          rows="6"
+                                >{{ old('control_flow_for', $language->controlFlowStatements->for_code) }}</textarea>
+
+                                @if ($errors->has('control_flow_for'))
+                                    <div class="invalid-feedback" style="display: block;">
+                                        <strong>{{ $errors->first('control_flow_for') }}</strong>
+                                    </div>
+                                @endif
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="card">
+                                    <div class="card-block">
+                                        <b>Linguagem R-Educ</b>
+                                        <pre><code>para variavel de valor1 ate valor2 passo x farei {<br>    comandos<br>}</code></pre>
+                                    </div>
+                                </div>
+                                <div class="card">
+                                    <div class="card-block">
+                                        <b>Linguagem C</b>
+                                        <pre><code>for (int k = 0; k < var; k++) {<br>    comandos<br>}</code></pre>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="form-group col-md-6">
                                 <label for="control_flow_while">Enquanto</label>
                                 <textarea type="text" class="form-control" name="control_flow_while" id="control_flow_while"
                                           rows="6"
