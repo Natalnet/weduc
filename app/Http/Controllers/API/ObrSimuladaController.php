@@ -13,7 +13,8 @@ class ObrSimuladaController extends Controller
         $release = SBoticsRelease::where('os', $os)->orderByDesc('released_at')->latest()->firstOrFail();
 
         return response()->json([
-            'version' => $release->version
+            'version' => $release->version,
+            'release_notes' => $release->release_notes
         ]);
     }
 }
