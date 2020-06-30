@@ -14,6 +14,7 @@ class ObrSimuladaController extends Controller
 
         return response()->json([
             'version' => $release->version,
+            'released_at' => $release->released_at,
             'release_notes' => $release->release_notes
         ]);
     }
