@@ -18,7 +18,7 @@ class User extends Authenticatable implements MustVerifyEmail
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'gender', 'email', 'password', 'dob', 'institution', 'is_public_institution', 'address', 'city', 'state'
     ];
 
     /**
@@ -28,6 +28,10 @@ class User extends Authenticatable implements MustVerifyEmail
      */
     protected $hidden = [
         'password', 'remember_token',
+    ];
+
+    protected $casts = [
+        'is_public_institution' => 'boolean',
     ];
 
     public function languages()

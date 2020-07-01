@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\User;
 use App\Http\Controllers\Controller;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -51,8 +52,17 @@ class RegisterController extends Controller
     {
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
+            'gender' => ['required', 'string', 'size:1'],
+            'dob' => ['required', 'date_format:d/m/Y'],
+            'institution' => ['nullable', 'string', 'max:255'],
+            'is_public_institution' => ['nullable', 'boolean'],
+            'address' => ['nullable', 'string', 'max:255'],
+            'city' => ['nullable', 'string', 'max:255'],
+            'state' => ['nullable', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:6', 'confirmed'],
+        ], [
+            'dob.date_format' => 'A data de nascimento precisa estar no formato dd/mm/aaaa'
         ]);
     }
 
@@ -66,6 +76,13 @@ class RegisterController extends Controller
     {
         return User::create([
             'name' => $data['name'],
+            'gender' => $data['gender'],
+            'dob' => Carbon::createFromFormat('d/m/Y', $data['dob']),
+            'institution' => $data['institution'],
+            'is_public_institution' => $data['is_public_institution'],
+            'address' => $data['address'],
+            'city' => $data['city'],
+            'state' => $data['state'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
