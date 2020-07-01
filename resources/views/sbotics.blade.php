@@ -41,7 +41,7 @@
                     <div class="mt-5 sm:mt-8 sm:flex sm:justify-center lg:justify-end">
                         <div class="rounded-md shadow">
                             <a href="https://www.dropbox.com/sh/vhxr7zpjup0l3ya/AAAS8_7-LklOXyfwqNbObTgBa?dl=0"
-                               target="_blank"
+                               target="_blank" onclick="handleOutboundLinkClicks(event)"
                                class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-teal-600 hover:bg-teal-500 focus:outline-none focus:shadow-outline transition duration-150 ease-in-out md:py-4 md:text-lg md:px-10">
                                 Baixar
                             </a>
@@ -49,7 +49,7 @@
                         @guest
                             @if (Route::has('register'))
                                 <div class="mt-3 sm:mt-0 sm:ml-3">
-                                    <a href="{{ route('register', ['redirect' => 'sbotics']) }}"
+                                    <a href="{{ route('register', ['redirect' => 'sbotics']) }}" onclick="handleOutboundLinkClicks(event)"
                                        class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base leading-6 font-medium rounded-md text-teal-700 bg-teal-100 hover:text-teal-600 hover:bg-teal-50 focus:outline-none focus:shadow-outline focus:border-teal-300 transition duration-150 ease-in-out md:py-4 md:text-lg md:px-10">
                                         Cadastre-se
                                     </a>
@@ -62,5 +62,15 @@
         </div>
     </div>
 </div>
+<script>
+    function handleOutboundLinkClicks(event) {
+        ga('send', 'event', {
+            eventCategory: 'Outbound Link',
+            eventAction: 'click',
+            eventLabel: event.target.href,
+            transport: 'beacon'
+        });
+    }
+</script>
 </body>
 </html>
