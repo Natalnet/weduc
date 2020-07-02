@@ -79,7 +79,7 @@ class RegisterController extends Controller
             'gender' => $data['gender'],
             'dob' => Carbon::createFromFormat('d/m/Y', $data['dob']),
             'institution' => $data['institution'],
-            'is_public_institution' => $data['is_public_institution'],
+            'is_public_institution' => $data['is_public_institution'] ?? null,
             'address' => $data['address'],
             'city' => $data['city'],
             'state' => $data['state'],
