@@ -40,7 +40,7 @@
                     </p>
                     <div class="mt-5 sm:mt-8 sm:flex sm:justify-center lg:justify-end">
                         <div class="rounded-md shadow">
-                            <a href="https://www.dropbox.com/sh/vhxr7zpjup0l3ya/AAAS8_7-LklOXyfwqNbObTgBa?dl=0"
+                            <a href="bit.ly/sBotics"
                                target="_blank" onclick="handleOutboundLinkClicks(event)"
                                class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-teal-600 hover:bg-teal-500 focus:outline-none focus:shadow-outline transition duration-150 ease-in-out md:py-4 md:text-lg md:px-10">
                                 Baixar
@@ -70,6 +70,7 @@
             eventLabel: event.target.href,
             transport: 'beacon'
         });
+        console.log(event.target.href)
     }
 </script>
 </body>
