@@ -78,10 +78,7 @@ class ProgramController extends Controller
 
         $program->name = $request->name;
         $program->reduc_code = $request->reduc_code;
-        if ($program->reduc_code === null)
-        {
-            $program->custom_code = $request->target_code;
-        }
+        $program->custom_code = $request->target_code;
         $program->save();
 
         return response(null, 204);
