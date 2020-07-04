@@ -124,7 +124,7 @@ class ProgramController extends Controller
             $trans->setMainFunction($language->main_function);
             $trans->setTaskDeclaration($language->other_functions);
             $trans->setCallFunction($language->call_function);
-            $trans->setInstructionSeparator(';');
+            $trans->setInstructionSeparator(";\r\n");
             $controlFlow = $language->controlFlowStatements()->first();
 
             $trans->setIfStatement($controlFlow->if_code);
