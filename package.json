@@ -24,7 +24,7 @@
         "cross-env": "^5.0.1",
         "jquery": "^3.5.0",
         "laravel-mix": "^2.0",
-        "lodash": "^4.17.4",
+        "lodash": "^4.17.19",
         "numeral": "^2.0.6",
         "pace-progress": "^1.0.2",
         "perfect-scrollbar": "^1.4.0",
