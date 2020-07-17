@@ -46,6 +46,19 @@
                                         </div>
                                     @endif
                                 </div>
+
+                                <div class="form-group">
+                                    <label for="target_description">Descrição para Linguagem Alvo</label>
+                                    <textarea type="text" class="form-control{{ $errors->has('target_description') ? ' is-invalid' : '' }}" name="target_description" id="target_description" placeholder="Descrição">
+                                        {{ old('target_description') }}
+                                    </textarea>
+
+                                    @if ($errors->has('target_description'))
+                                        <div class="invalid-feedback" style="display: block;">
+                                            <strong>{{ $errors->first('target_description') }}</strong>
+                                        </div>
+                                    @endif
+                                </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">

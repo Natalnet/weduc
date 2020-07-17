@@ -60,6 +60,7 @@ class FunctionController extends Controller
         $request->validate([
             'name' => 'required',
             'description' => 'required',
+            'target_description' => 'nullable',
             'type' => 'required',
             'return_type' => 'required',
             'parameters' => 'required',
@@ -104,6 +105,7 @@ class FunctionController extends Controller
         $request->validate([
             'name' => 'required',
             'description' => 'required',
+            'target_description' => 'nullable',
             'type' => 'required',
             'return_type' => 'required',
             'parameters' => 'required',
@@ -112,6 +114,7 @@ class FunctionController extends Controller
 
         $function = ReducFunction::find($id);
         $function->fill($request->all())->save();
+        $function->language->touch();
         return redirect()->route('functions.by-language', $function->language);
     }
 

@@ -21,6 +21,7 @@ class CreateFunctionsTable extends Migration
                   ->onDelete('cascade');
             $table->string('name');
             $table->string('description');
+            $table->string('target_description')->nullable();
             $table->string('type');
             $table->string('return_type');
             $table->tinyInteger('parameters')->unsigned();
