@@ -12,6 +12,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Validation\Rule;
+use Illuminate\Validation\ValidationException;
 use Natalnet\Relex\Exceptions\InvalidCharacterException;
 use Natalnet\Relex\Exceptions\SymbolNotDefinedException;
 use Natalnet\Relex\Exceptions\TypeMismatchException;
@@ -86,6 +87,12 @@ class ProgramController extends Controller
 
     public function compile(Request $request, Program $program)
     {
+        if ($program->reduc_code === null) {
+            throw ValidationException::withMessages([
+                'reduc_code' => 'O código reduc é obrigatório.'
+            ]);
+        }
+
         $started_at = Carbon::now()->toDateTimeString();
 
         try {
