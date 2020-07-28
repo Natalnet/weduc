@@ -15,6 +15,7 @@ use Illuminate\Validation\Rule;
 use Illuminate\Validation\ValidationException;
 use Natalnet\Relex\Exceptions\InvalidCharacterException;
 use Natalnet\Relex\Exceptions\SymbolNotDefinedException;
+use Natalnet\Relex\Exceptions\SymbolRedeclaredException;
 use Natalnet\Relex\Exceptions\TypeMismatchException;
 use Natalnet\Relex\Exceptions\UnexpectedTokenException;
 use Natalnet\Relex\FunctionSymbol;
@@ -185,6 +186,9 @@ class ProgramController extends Controller
             } elseif ($e instanceof UnexpectedTokenException) {
                 $line = $e->codeLine;
                 $message = "Token não esperado. Esperado: $e->expectedToken, encontrado: $e->foundToken";
+            } elseif ($e instanceof SymbolRedeclaredException) {
+                $line = $e->codeLine;
+                $message = "Símbolo $e->symbolName não pode ser redeclarado.";
             } else {
                 $line = 0;
                 $message = $e->getMessage();
