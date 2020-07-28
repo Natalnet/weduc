@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Metrics\Core\Partition;
 use Natalnet\Relex\Exceptions\InvalidCharacterException;
 use Natalnet\Relex\Exceptions\SymbolNotDefinedException;
+use Natalnet\Relex\Exceptions\SymbolRedeclaredException;
 use Natalnet\Relex\Exceptions\TypeMismatchException;
 use Natalnet\Relex\Exceptions\UnexpectedTokenException;
 
@@ -33,6 +34,8 @@ class CompilationErrors extends Partition
                         return 'Tipos incompatíveis';
                     case UnexpectedTokenException::class:
                         return 'Token não esperado';
+                    case SymbolRedeclaredException::class:
+                        return 'Símbolo redeclarado';
                     default:
                         return ucfirst($value);
                 }
