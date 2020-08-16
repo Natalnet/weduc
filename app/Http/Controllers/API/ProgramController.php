@@ -56,6 +56,13 @@ class ProgramController extends Controller
                     return $query->where('user_id', auth()->id());
                 })
             ],
+            'blockly_code' => [
+                'bail',
+                'required_without_all:reduc_code,target_code',
+                Rule::requiredIf(function () use ($request) {
+                    return $request->reduc_code === null && $request->target_code === null;
+                })
+            ],
             'reduc_code' => 'required_without:target_code|required_if:target_code,null',
             'target_code' => 'required_if:reduc_code,null',
         ]);
@@ -64,6 +71,7 @@ class ProgramController extends Controller
         $program = new Program();
         $program->user_id = auth()->user()->id;
         $program->name = $request->name;
+        $program->blockly_code = $request->blockly_code;
         $program->reduc_code = $request->reduc_code;
         $program->custom_code = $request->target_code;
 
@@ -74,11 +82,19 @@ class ProgramController extends Controller
     {
         $request->validate([
             'name' => 'required',
+            'blockly_code' => [
+                'bail',
+                'required_without_all:reduc_code,target_code',
+                Rule::requiredIf(function () use ($request) {
+                    return $request->reduc_code === null && $request->target_code === null;
+                })
+            ],
             'reduc_code' => 'required_without:target_code|required_if:target_code,null',
             'target_code' => 'required_if:reduc_code,null',
         ]);
 
         $program->name = $request->name;
+        $program->blockly_code = $request->blockly_code;
         $program->reduc_code = $request->reduc_code;
         $program->custom_code = $request->target_code;
         $program->save();

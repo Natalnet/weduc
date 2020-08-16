@@ -21,8 +21,9 @@ class CreateProgramsTable extends Migration
             $table->foreign('programming_language_id')->references('id')->on('programming_languages')
                   ->onDelete('cascade');
             $table->string('name');
-            $table->text('reduc_code')->nullable();
-            $table->text('cunstom_code')->nullable();
+            $table->longText('blockly_code')->nullable();
+            $table->longText('reduc_code')->nullable();
+            $table->longText('custom_code')->nullable();
             $table->timestamps();
         });
     }
