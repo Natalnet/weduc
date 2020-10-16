@@ -2223,12 +2223,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Natalnet/relex.git",
-                "reference": "dda567ed3198f43fa9a060842da7c764ff3f7293"
+                "reference": "1256ab2f22f2c13e5ee0bbd987372aa86cd2bd24"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Natalnet/relex/zipball/dda567ed3198f43fa9a060842da7c764ff3f7293",
-                "reference": "dda567ed3198f43fa9a060842da7c764ff3f7293",
+                "url": "https://api.github.com/repos/Natalnet/relex/zipball/1256ab2f22f2c13e5ee0bbd987372aa86cd2bd24",
+                "reference": "1256ab2f22f2c13e5ee0bbd987372aa86cd2bd24",
                 "shasum": ""
             },
             "require": {
@@ -2267,7 +2267,7 @@
                 "source": "https://github.com/Natalnet/relex/tree/master",
                 "issues": "https://github.com/Natalnet/relex/issues"
             },
-            "time": "2020-07-30T19:25:16+00:00"
+            "time": "2020-10-16T13:22:17+00:00"
         },
         {
             "name": "nesbot/carbon",
@@ -7024,6 +7024,7 @@
             "keywords": [
                 "tokenizer"
             ],
+            "abandoned": true,
             "time": "2019-09-17T06:23:10+00:00"
         },
         {
