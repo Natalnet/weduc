@@ -12,7 +12,7 @@
     "devDependencies": {
         "@coreui/coreui": "^2.1.0",
         "@fortawesome/fontawesome-free": "^5.5.0",
-        "axios": "^0.18",
+        "axios": "^0.21",
         "babel-helper-vue-jsx-merge-props": "^2.0.3",
         "babel-plugin-syntax-jsx": "^6.18.0",
         "babel-plugin-transform-vue-jsx": "^3.7.0",
