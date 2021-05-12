@@ -33,7 +33,7 @@
         "vue": "^2.5.17"
     },
     "dependencies": {
-        "codemirror": "^5.40.2",
+        "codemirror": "^5.58.2",
         "form-backend-validation": "^2.3.3",
         "npm": "^6.13.4",
         "portal-vue": "^2.1.5",
